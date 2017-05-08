@@ -33,7 +33,7 @@ namespace diploma_project
 			Console.WriteLine ("t(pr) = " + sw.Elapsed);*/
 
 			var y = YJMElement.Generate (5);
-
+			var zzz = "zzz";
 			var e = new ElementarySymmetricPolynomial (4, 3);
 			var res = e.Substitution (y);
 			//var res = new PermutationDictionary();

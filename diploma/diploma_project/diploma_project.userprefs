@@ -2,14 +2,14 @@
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug|x86" />
   <MonoDevelop.Ide.Workbench ActiveDocument="diploma_project/Program.cs">
     <Files>
-      <File FileName="diploma_project/Program.cs" Line="36" Column="4" />
-      <File FileName="diploma_project/Classes/Permutation.cs" Line="194" Column="1" />
-      <File FileName="diploma_project/Classes/Cycle.cs" Line="150" Column="4" />
-      <File FileName="diploma_project/Classes/YJMElement.cs" Line="42" Column="21" />
-      <File FileName="diploma_project/Classes/SymmetricPolynomial.cs" Line="12" Column="17" />
-      <File FileName="diploma_project/Classes/ElementarySymmetricPolynomial.cs" Line="68" Column="31" />
-      <File FileName="diploma_project/Classes/BinomialCoefficients.cs" Line="26" Column="1" />
-      <File FileName="diploma_project/Classes/PermutationList.cs" Line="44" Column="1" />
+      <File FileName="diploma_project/Program.cs" Line="36" Column="18" />
+      <File FileName="diploma_project/Classes/Permutation.cs" Line="1" Column="1" />
+      <File FileName="diploma_project/Classes/Cycle.cs" Line="1" Column="1" />
+      <File FileName="diploma_project/Classes/YJMElement.cs" Line="1" Column="1" />
+      <File FileName="diploma_project/Classes/SymmetricPolynomial.cs" Line="1" Column="1" />
+      <File FileName="diploma_project/Classes/ElementarySymmetricPolynomial.cs" Line="1" Column="1" />
+      <File FileName="diploma_project/Classes/BinomialCoefficients.cs" Line="1" Column="1" />
+      <File FileName="diploma_project/Classes/PermutationList.cs" Line="1" Column="1" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
