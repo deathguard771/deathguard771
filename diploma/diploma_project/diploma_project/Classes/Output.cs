@@ -8,7 +8,7 @@ namespace diploma_project
 	public enum Output
 	{
 		/// <summary>
-		/// Вывод не нужен
+		/// Без вывода
 		/// </summary>
 		None,
 		/// <summary>

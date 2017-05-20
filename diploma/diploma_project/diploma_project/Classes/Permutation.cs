@@ -25,13 +25,45 @@ namespace diploma_project
 			}
 		});
 		/// <summary>
+		/// "Сравнение двух перестановок"
+		/// </summary>
+		/// <param name="p1">P1.</param>
+		/// <param name="p2">P2.</param>
+		public static bool Compare(Permutation p1, Permutation p2)
+		{
+			if (p1.NotTrivialCycles.Count != p2.NotTrivialCycles.Count)
+			{
+				return false;
+			}
+			for (int i = 0; i < p1.NotTrivialCycles.Count; i++)
+			{
+				//if (p1.NotTrivialCycles [i].Length != p2.NotTrivialCycles [i].Length)
+				if (p2.NotTrivialCycles.Where(c => c.Length == p1.NotTrivialCycles[i].Length).Count() == 0)
+				{
+					return false;
+				}
+			}
+			return true;
+		}
+		/// <summary>
 		/// Порядок перестановки
 		/// </summary>
 		private int order;
 		/// <summary>
 		/// Циклы
 		/// </summary>
-		private List<Cycle> cycles;
+		public List<Cycle> cycles;
+		/// <summary>
+		/// Gets the not trivial cycles.
+		/// </summary>
+		/// <value>The not trivial cycles.</value>
+		public List<Cycle> NotTrivialCycles
+		{
+			get
+			{
+				return this.cycles.Where (c => c.Elements.Length > 1).ToList ();
+			}
+		}
 		/// <summary>
 		/// Порядок перестановки
 		/// </summary>

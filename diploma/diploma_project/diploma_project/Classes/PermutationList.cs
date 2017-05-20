@@ -63,21 +63,52 @@ namespace diploma_project
 		/// <summary>
 		/// Печатает словарь перестановок
 		/// </summary>
-		public void Print(Output output = Output.Console, string path = "")
+		public void Print(Output output = Output.Console, string path = "", string text = "")
 		{
+			if (text == "")
+			{
+				text = Text;
+			}
 			if (output == Output.Console)
 			{
-				Console.WriteLine (Text);
+				Console.WriteLine (text);
 			}
 			else if (output == Output.File)
 			{
 				using (var fs = File.CreateText (path))
 				{
-					fs.Write (Text/*.Replace(" + ", Environment.NewLine)*/);
+					fs.Write (text);
 					fs.WriteLine ();
 				}
 			}
 		}
+		/// <summary>
+		/// Печатаем только тип перестановки и его количество
+		/// </summary>
+		public void Print2(Output output = Output.Console, string path = "")
+		{
+			var dictCounts = new Dictionary<Permutation, int> ();
+			foreach (var kvp in this)
+			{
+				var flagInc = false;
+				foreach (var kvp2 in dictCounts)
+				{
+					if (Permutation.Compare(kvp2.Key, kvp.Key))
+					{
+						dictCounts[kvp2.Key]++;
+						flagInc = true;
+						break;
+					}
+				}
+				if (!flagInc)
+				{
+					dictCounts.Add (kvp.Key, 1);
+				}
+			}
+			var txt = dictCounts.Select(kvp => kvp.Key.Text + " = " + kvp.Value).ToList();
+			Print(output, path, string.Join("\n", txt));
+		}
 	}
 }
+
 

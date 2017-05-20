@@ -12,12 +12,16 @@ namespace diploma_project
 			var y = YJMElement.Generate (variablesCount + 1);
 			var e = new ElementarySymmetricPolynomial (variablesCount, polynomialNumber);
 			var res = e.Substitution (y);
-			res.Print (output, variablesCount + "___" + polynomialNumber + ".txt");
+			res.Print2 (output, polynomialNumber + "___" + variablesCount + ".txt");
 			return res;
 		}
 		public static void Main (string[] args)
 		{
-			var pn = 4;
+			var pn = 3;
+			var vc = 3;
+			YoungGrid.Generate (pn, vc);
+
+			var length = 10;
 			var files = Directory.GetFiles (AppDomain.CurrentDomain.BaseDirectory);
 			foreach (var f in files)
 			{
@@ -27,11 +31,11 @@ namespace diploma_project
 				}
 			}
 			var ls = new List<PermutationDictionary> ();
-			for (int i = 0; i < 10; i++)
+			for (int i = 0; i < length; i++)
 			{
 				if (i >= pn)
 				{
-					ls.Add (Generate (i, pn, Output.None));
+					ls.Add (Generate (i, pn, Output.File));
 				}
 			}
 		}
