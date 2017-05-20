@@ -8,3 +8,8 @@
 /home/deathguard771/study/pmim-21/diploma/diploma_project/diploma_project/bin/Debug/diploma_project.exe
 /home/deathguard771/study/pmim-21/diploma/diploma_project/diploma_project/obj/x86/Debug/diploma_project.exe
 /home/deathguard771/study/pmim-21/diploma/diploma_project/diploma_project/obj/x86/Debug/diploma_project.exe.mdb
+/home/deathguard771/study/deathguard771/diploma/diploma_project/diploma_project/obj/x86/Debug/.NETFramework,Version=v4.5.AssemblyAttribute.cs
+/home/deathguard771/study/deathguard771/diploma/diploma_project/diploma_project/bin/Debug/diploma_project.exe.mdb
+/home/deathguard771/study/deathguard771/diploma/diploma_project/diploma_project/bin/Debug/diploma_project.exe
+/home/deathguard771/study/deathguard771/diploma/diploma_project/diploma_project/obj/x86/Debug/diploma_project.exe
+/home/deathguard771/study/deathguard771/diploma/diploma_project/diploma_project/obj/x86/Debug/diploma_project.exe.mdb

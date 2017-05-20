@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 
 namespace diploma_project
@@ -62,9 +63,20 @@ namespace diploma_project
 		/// <summary>
 		/// Печатает словарь перестановок
 		/// </summary>
-		public void Print()
+		public void Print(Output output = Output.Console, string path = "")
 		{
-			Console.WriteLine (Text);
+			if (output == Output.Console)
+			{
+				Console.WriteLine (Text);
+			}
+			else if (output == Output.File)
+			{
+				using (var fs = File.CreateText (path))
+				{
+					fs.Write (Text/*.Replace(" + ", Environment.NewLine)*/);
+					fs.WriteLine ();
+				}
+			}
 		}
 	}
 }
