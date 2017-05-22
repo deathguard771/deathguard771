@@ -43,10 +43,10 @@
     <Compile Include="Classes\ElementarySymmetricPolynomial.cs" />
     <Compile Include="Classes\BinomialCoefficients.cs" />
     <Compile Include="Classes\Combination.cs" />
-    <Compile Include="Classes\PermutationList.cs" />
     <Compile Include="Classes\Output.cs" />
     <Compile Include="Classes\YoungGrid.cs" />
     <Compile Include="Classes\NumberSplits.cs" />
+    <Compile Include="Classes\PermutationDictionary.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>

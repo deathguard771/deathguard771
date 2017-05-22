@@ -33,20 +33,20 @@ namespace diploma_project
 					}
 				}));
 			}
-		}
+   		}
 		/// <summary>
 		/// Добавляет перестановку в словарь
 		/// </summary>
 		/// <param name="p">Перестановка</param>
-		public void Add(Permutation p)
+		public void Add(Permutation p, int count = 1)
 		{
 			if (this.ContainsKey (p))
 			{
-				this[p]++;
+				this[p] += count;
 			}
 			else
 			{
-				base.Add (p, 1);
+				base.Add (p, count);
 			}
 		}
 		/// <summary>
@@ -107,6 +107,62 @@ namespace diploma_project
 			}
 			var txt = dictCounts.Select(kvp => kvp.Key.Text + " = " + kvp.Value).ToList();
 			Print(output, path, string.Join("\n", txt));
+		}
+		/// <summary>
+		/// Copy the specified PermutationDictionary.
+		/// </summary>
+		/// <param name="p1">P1.</param>
+		public static PermutationDictionary Copy(PermutationDictionary p1)
+		{
+			var res = new PermutationDictionary ();
+			foreach (var kvp in p1)
+			{
+				res.Add (kvp.Key, kvp.Value);
+			}
+			return res;
+		}
+
+		public void ClearEmptyEntries()
+		{
+			var keys = new List<Permutation> ();
+			foreach (var kvp in this)
+			{
+				if (kvp.Key.NotTrivialCycles.Count == 0)
+				{
+					keys.Add (kvp.Key);
+				}
+			}
+			foreach (var key in keys)
+			{
+				this.Remove (key);
+			}
+		}
+
+		/// <param name="p1">P1.</param>
+		/// <param name="p2">P2.</param>
+		public static PermutationDictionary operator * (PermutationDictionary p1, PermutationDictionary p2)
+		{
+			var res = new PermutationDictionary ();
+			if (p1.Count == 0 && p2.Count > 0)
+			{
+				return Copy (p2);
+			}
+			else if (p2.Count == 0 && p1.Count > 0)
+				{
+					return Copy (p1);
+				}
+				else if (p1.Count == 0 && p2.Count == 0)
+					{
+						throw new Exception ("Две нулевых штуки.");
+					}
+			foreach (var kvp1 in p1)
+			{
+				foreach (var kvp2 in p2)
+				{
+					res.Add( kvp1.Key * kvp2.Key, kvp1.Value * kvp2.Value);
+				}
+			}
+			return res;
 		}
 	}
 }

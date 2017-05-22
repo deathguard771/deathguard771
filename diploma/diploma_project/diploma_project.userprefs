@@ -1,15 +1,17 @@
 ﻿<Properties StartupItem="diploma_project/diploma_project.csproj">
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug|x86" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="diploma_project/Program.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="diploma_project/Classes/YoungGrid.cs">
     <Files>
-      <File FileName="diploma_project/Program.cs" Line="17" Column="4" />
-      <File FileName="diploma_project/Classes/Output.cs" Line="11" Column="21" />
-      <File FileName="diploma_project/Classes/PermutationList.cs" Line="67" Column="4" />
+      <File FileName="diploma_project/Classes/YoungGrid.cs" Line="48" Column="1" />
+      <File FileName="diploma_project/Program.cs" Line="21" Column="14" />
+      <File FileName="diploma_project/Classes/PermutationDictionary.cs" Line="139" Column="1" />
+      <File FileName="diploma_project/Classes/Permutation.cs" Line="240" Column="8" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
     <BreakpointStore>
       <Breakpoint file="/home/deathguard771/study/pmim-21/diploma_project/diploma_project/Classes/BinomialCoefficients.cs" line="17" column="1" />
+      <Breakpoint file="/home/deathguard771/study/deathguard771/diploma/diploma_project/diploma_project/Classes/YoungGrid.cs" line="43" column="1" />
     </BreakpointStore>
   </MonoDevelop.Ide.DebuggingService.Breakpoints>
   <MonoDevelop.Ide.DebuggingService.PinnedWatches />

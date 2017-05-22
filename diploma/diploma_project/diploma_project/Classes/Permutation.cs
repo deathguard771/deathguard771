@@ -231,7 +231,15 @@ namespace diploma_project
 		{
 			if (p1.order != p2.order)
 			{
-				throw new ArgumentException ("Порядок перестановок не совпадает");
+				if (p1.order > p2.order)
+				{
+					p2.SetOrder (p1.order);
+				}
+				else if (p1.order < p2.order)
+				{
+					p1.SetOrder (p2.order);
+				}
+				//throw new ArgumentException ("Порядок перестановок не совпадает");
 			}
 			#region parallel
 			/*var cls = new List<Cycle> ();

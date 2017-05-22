@@ -17,8 +17,8 @@ namespace diploma_project
 		}
 		public static void Main (string[] args)
 		{
-			var pn = 3;
-			var vc = 3;
+			var pn = 2;
+			var vc = 2;
 			YoungGrid.Generate (pn, vc);
 
 			var length = 10;
