@@ -75,7 +75,7 @@ namespace diploma_project
 			}
 			else if (output == Output.File)
 			{
-				using (var fs = File.CreateText (path))
+				using (var fs = File.AppendText (path))
 				{
 					fs.Write (text);
 					fs.WriteLine ();
@@ -106,7 +106,7 @@ namespace diploma_project
 				}
 			}
 			var txt = dictCounts.Select(kvp => kvp.Key.Text + " = " + kvp.Value).ToList();
-			Print(output, path, string.Join("\n", txt));
+			Print(output, path, string.Join("\n", txt) + "\n\n");
 		}
 		/// <summary>
 		/// Copy the specified PermutationDictionary.

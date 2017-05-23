@@ -17,6 +17,7 @@ namespace diploma_project
 		public static void Generate(int degree, int variablesCount)
 		{
 			var sigmas = new List<List<PermutationDictionary>> ();
+			/*//first variant
 			for (int i = 1; i <= degree; i++)
 			{
 				var y = YJMElement.Generate (variablesCount + 1);
@@ -40,7 +41,45 @@ namespace diploma_project
 					}
 				}
 			}
+			*/
+
+			//second variant
+			var ls = new List<PermutationDictionary> ();
+			for (int i = 1; i <= degree; i++)
+			{
+				var y = YJMElement.Generate (variablesCount + 1);
+				var e = new ElementarySymmetricPolynomial (variablesCount, i);
+				ls.Add (e.Substitution (y));
+				sigmas.Add (new List<PermutationDictionary>());
+			}
+
+			for (int i = 1; i <= degree; i++)
+			{
+				var splits = NumberSplits.GenerateSplits (i);
+				foreach (var split in splits)
+				{
+					var res = new PermutationDictionary ();
+					for (int j = 0; j < split.Count; j++)
+					{
+						for (int k = 0; k < split [j]; k++)
+						{
+							res = res * ls [j];
+						}
+					}
+					res.ClearEmptyEntries ();
+					sigmas [i - 1].Add (res);
+				}
+			}
+
 			var a = 0;
+
+			foreach (var item in sigmas)
+			{
+				foreach (var item2 in item)
+				{
+					item2.Print2 (Output.File, "temp.txt");
+				}
+			}
 		}
 	}
 }
