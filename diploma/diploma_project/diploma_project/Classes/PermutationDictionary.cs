@@ -34,6 +34,9 @@ namespace diploma_project
 				}));
 			}
    		}
+			
+		public List<int> Split = new List<int> ();
+
 		/// <summary>
 		/// Добавляет перестановку в словарь
 		/// </summary>
@@ -85,7 +88,7 @@ namespace diploma_project
 		/// <summary>
 		/// Печатаем только тип перестановки и его количество
 		/// </summary>
-		public void Print2(Output output = Output.Console, string path = "")
+		public void Print2(Output output = Output.Console, string path = "", string addText = "")
 		{
 			var dictCounts = new Dictionary<Permutation, int> ();
 			foreach (var kvp in this)
@@ -95,18 +98,26 @@ namespace diploma_project
 				{
 					if (Permutation.Compare(kvp2.Key, kvp.Key))
 					{
-						dictCounts[kvp2.Key]++;
+						dictCounts [kvp2.Key] += kvp.Value;
 						flagInc = true;
 						break;
 					}
 				}
 				if (!flagInc)
 				{
-					dictCounts.Add (kvp.Key, 1);
+					dictCounts.Add (kvp.Key, kvp.Value);
 				}
 			}
-			var txt = dictCounts.Select(kvp => kvp.Key.Text + " = " + kvp.Value).ToList();
-			Print(output, path, string.Join("\n", txt) + "\n\n");
+			var txt = dictCounts.Select(kvp => 
+			{
+				var cnt = Permutation.GetPermutationsCount(kvp.Key);
+				if (kvp.Value % cnt > 0)
+				{
+					Console.WriteLine("Error. Order = " + kvp.Key.Order + "; Count = " + kvp.Value + "; PermCount = " + cnt + "; Perm = " + kvp.Key.Text);
+				}
+				return (kvp.Value) + (kvp.Key.NotTrivialCycles.Count > 0 ? ("(" + kvp.Key.Text + ")") : "");
+			});
+			Print(output, path, string.Join(" + ", txt) + addText + "\n");
 		}
 		/// <summary>
 		/// Copy the specified PermutationDictionary.

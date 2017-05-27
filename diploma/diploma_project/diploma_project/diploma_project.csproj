@@ -47,6 +47,7 @@
     <Compile Include="Classes\YoungGrid.cs" />
     <Compile Include="Classes\NumberSplits.cs" />
     <Compile Include="Classes\PermutationDictionary.cs" />
+    <Compile Include="Classes\Factorial.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>

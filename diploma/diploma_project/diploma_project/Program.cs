@@ -7,21 +7,8 @@ namespace diploma_project
 {
 	class MainClass
 	{
-		public static PermutationDictionary Generate(int variablesCount, int polynomialNumber, Output output)
-		{
-			var y = YJMElement.Generate (variablesCount + 1);
-			var e = new ElementarySymmetricPolynomial (variablesCount, polynomialNumber);
-			var res = e.Substitution (y);
-			res.Print2 (output, polynomialNumber + "___" + variablesCount + ".txt");
-			return res;
-		}
 		public static void Main (string[] args)
 		{
-			var pn = 4;
-			var vc = 4;
-			YoungGrid.Generate (pn, vc);
-
-			var length = 10;
 			var files = Directory.GetFiles (AppDomain.CurrentDomain.BaseDirectory);
 			foreach (var f in files)
 			{
@@ -30,6 +17,21 @@ namespace diploma_project
 					File.Delete (f);
 				}
 			}
+			
+			var pn = 3;
+			var vc = pn * 2;
+
+			using (var fs = File.AppendText ("temp.txt"))
+			{
+				fs.WriteLine ("До " + pn + " степени.");
+				fs.WriteLine (vc + " переменных.");
+				fs.WriteLine ();
+			}
+
+			YoungGrid.Generate (pn, vc);
+
+			/*var length = 10;
+
 			var ls = new List<PermutationDictionary> ();
 			for (int i = 0; i < length; i++)
 			{
@@ -37,7 +39,7 @@ namespace diploma_project
 				{
 					ls.Add (Generate (i, pn, Output.File));
 				}
-			}
+			}*/
 		}
 	}
 }

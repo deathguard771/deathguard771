@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 
 namespace diploma_project
@@ -17,13 +18,16 @@ namespace diploma_project
 		public static void Generate(int degree, int variablesCount)
 		{
 			var sigmas = new List<List<PermutationDictionary>> ();
-			/*//first variant
+			//first variant
 			for (int i = 1; i <= degree; i++)
 			{
 				var y = YJMElement.Generate (variablesCount + 1);
 				var e = new ElementarySymmetricPolynomial (variablesCount, i);
-				sigmas.Add (new List<PermutationDictionary> { e.Substitution (y) });
+				var pd = e.Substitution (y);
+				pd.Split.Add (i);
+				sigmas.Add (new List<PermutationDictionary> { pd });
 			}
+			//sigmas [0] [0].Print ();
 			for (int i = 2; i <= degree; i++)
 			{
 				var ls = NumberSplits.GenerateSplits (i);
@@ -36,14 +40,14 @@ namespace diploma_project
 						{
 							res = res * sigmas [elem - 1] [0];
 						}
-						res.ClearEmptyEntries ();
+						res.Split.AddRange (split);
+						//res.ClearEmptyEntries ();
 						sigmas [i - 1].Add (res);
 					}
 				}
 			}
-			*/
 
-			//second variant
+			/*//second variant
 			var ls = new List<PermutationDictionary> ();
 			for (int i = 1; i <= degree; i++)
 			{
@@ -69,15 +73,15 @@ namespace diploma_project
 					res.ClearEmptyEntries ();
 					sigmas [i - 1].Add (res);
 				}
-			}
+			}*/
 
-			var a = 0;
+			//var a = 0;
 
 			foreach (var item in sigmas)
 			{
 				foreach (var item2 in item)
 				{
-					item2.Print2 (Output.File, "temp.txt");
+					item2.Print2 (Output.File, "temp.txt", " = {" + string.Join(", ", item2.Split) + "}");
 				}
 			}
 		}

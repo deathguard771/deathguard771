@@ -10,6 +10,28 @@ namespace diploma_project
 	/// </summary>
 	public class Permutation
 	{
+		public static int GetPermutationsCount(Permutation p)
+		{
+			var dict = new Dictionary<int, int> ();
+			/*for (int i = 1; i <= p.Order; i++)
+			{
+				dict.Add (i, 0);
+			}*/
+			foreach (var cycle in p.cycles)
+			{
+				if (!dict.ContainsKey (cycle.Length))
+				{
+					dict.Add (cycle.Length, 0);
+				}
+				dict [cycle.Length]++;
+			}
+			var nnn = 1;
+			foreach (var kvp in dict)
+			{
+				nnn *= (int)Math.Pow (kvp.Key, kvp.Value) * Factorial.Get(kvp.Value);
+			}
+			return Factorial.Get(p.Order) / nnn;
+		}
 		/// <summary>
 		/// Компаратор для сортировки циклов перестановки 
 		/// </summary>
@@ -79,7 +101,14 @@ namespace diploma_project
 		{
 			get
 			{
-				return string.Join ("", cycles.Where (c => c.Length > 1).Select (cycle => cycle.Text));
+				if (NotTrivialCycles.Count > 0)
+				{
+					return string.Join ("", NotTrivialCycles.Select (cycle => cycle.Text));
+				}
+				else
+				{
+					return string.Join ("", cycles.Select (cycle => cycle.Text));
+				}
 			}
 		}
 		/// <summary>
