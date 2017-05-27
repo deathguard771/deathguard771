@@ -91,6 +91,8 @@ namespace diploma_project
 		public void Print2(Output output = Output.Console, string path = "", string addText = "")
 		{
 			var dictCounts = new Dictionary<Permutation, int> ();
+			//var flag = false;
+			//res = false;
 			foreach (var kvp in this)
 			{
 				var flagInc = false;
@@ -108,16 +110,21 @@ namespace diploma_project
 					dictCounts.Add (kvp.Key, kvp.Value);
 				}
 			}
+			//Permutation res2 = null;
 			var txt = dictCounts.Select(kvp => 
 			{
 				var cnt = Permutation.GetPermutationsCount(kvp.Key);
 				if (kvp.Value % cnt > 0)
 				{
-					Console.WriteLine("Error. Order = " + kvp.Key.Order + "; Count = " + kvp.Value + "; PermCount = " + cnt + "; Perm = " + kvp.Key.Text);
+					//flag = true;
+					//res2 = kvp.Key;
+					Console.WriteLine("Error. Order = " + kvp.Key.Order + "; Perm = " + kvp.Key.Text + "; Count = " + kvp.Value + "; PermCount = " + cnt + "; Reminder = " + (kvp.Value % cnt));
 				}
-				return (kvp.Value) + (kvp.Key.NotTrivialCycles.Count > 0 ? ("(" + kvp.Key.Text + ")") : "");
+				return ((kvp.Value / cnt) != 1 ? (kvp.Value / cnt).ToString() : "") + (kvp.Key.NotTrivialCycles.Count > 0 ? ("(" + kvp.Key.Text + ")") : "");
 			});
 			Print(output, path, string.Join(" + ", txt) + addText + "\n");
+			//res = flag;
+			//return res2;
 		}
 		/// <summary>
 		/// Copy the specified PermutationDictionary.
@@ -132,7 +139,9 @@ namespace diploma_project
 			}
 			return res;
 		}
-
+		/// <summary>
+		/// Clears the empty entries.
+		/// </summary>
 		public void ClearEmptyEntries()
 		{
 			var keys = new List<Permutation> ();
@@ -147,6 +156,36 @@ namespace diploma_project
 			{
 				this.Remove (key);
 			}
+		}
+		/// <summary>
+		/// Sets the order.
+		/// </summary>
+		/// <param name="newOrder">New order.</param>
+		public void SetOrder(int newOrder)
+		{
+			foreach (var kvp in this)
+			{
+				kvp.Key.SetOrder (newOrder);
+			}
+		}
+		/// <summary>
+		/// Sets the order.
+		/// </summary>
+		public void SetOrder()
+		{
+			var newOrder = GetMaxOrder();
+			foreach (var kvp in this)
+			{
+				kvp.Key.SetOrder (newOrder);
+			}
+		}
+		/// <summary>
+		/// Gets the max order.
+		/// </summary>
+		/// <returns>The max order.</returns>
+		public int GetMaxOrder()
+		{
+			return this.Keys.Max (t => t.Order);
 		}
 
 		/// <param name="p1">P1.</param>
@@ -170,7 +209,9 @@ namespace diploma_project
 			{
 				foreach (var kvp2 in p2)
 				{
-					res.Add( kvp1.Key * kvp2.Key, kvp1.Value * kvp2.Value);
+					var resKey = kvp1.Key * kvp2.Key;
+					var resVal = kvp1.Value * kvp2.Value;
+					res.Add( resKey, resVal);
 				}
 			}
 			return res;

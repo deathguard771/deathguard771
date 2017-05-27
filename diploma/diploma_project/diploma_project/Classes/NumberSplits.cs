@@ -43,7 +43,7 @@ namespace diploma_project
 			{
 				for (int j = i - 1; j >= 0; j--)
 				{
-					if (CompareSplits2 (fCompoz [i], fCompoz [j]))
+					if (CompareSplits (fCompoz [i], fCompoz [j]))
 					{
 						fCompoz.RemoveAt (i);
 						break;
@@ -100,39 +100,14 @@ namespace diploma_project
 			{
 				_prev.RemoveAt(_prev.Count - 1);
 			}
-		}
-		/// <summary>
-		/// Compares the splits.
-		/// </summary>
-		/// <returns><c>true</c>, if splits was compared, <c>false</c> otherwise.</returns>
-		/// <param name="l1">L1.</param>
-		/// <param name="l2">L2.</param>
-		private static bool CompareSplits(List<int> l1, List<int> l2)
-		{
-			if (l1.Count < l2.Count)
-			{
-				return true;
-			}
-			else if (l2.Count < l1.Count)
-				{
-					return false;
-				}
-			for (int i = 0; i < l1.Count; i++)
-			{
-				if (l1 [i] > l2 [i])
-				{
-					return true;
-				}
-			}
-			return false;
-		}
+   		}
 		/// <summary>
 		/// Compares the splits2.
 		/// </summary>
 		/// <returns><c>true</c>, if splits2 was compared, <c>false</c> otherwise.</returns>
 		/// <param name="l1">L1.</param>
 		/// <param name="l2">L2.</param>
-		private static bool CompareSplits2(List<int> l1, List<int> l2)
+		private static bool CompareSplits(List<int> l1, List<int> l2)
 		{
 			if (l1.Count != l2.Count)
 			{

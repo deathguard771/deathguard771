@@ -2,10 +2,10 @@
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug|x86" />
   <MonoDevelop.Ide.Workbench ActiveDocument="diploma_project/Classes/PermutationDictionary.cs">
     <Files>
-      <File FileName="diploma_project/Classes/YoungGrid.cs" Line="34" Column="5" />
-      <File FileName="diploma_project/Program.cs" Line="22" Column="20" />
-      <File FileName="diploma_project/Classes/PermutationDictionary.cs" Line="86" Column="5" />
-      <File FileName="diploma_project/Classes/Permutation.cs" Line="33" Column="11" />
+      <File FileName="diploma_project/Classes/YoungGrid.cs" Line="59" Column="4" />
+      <File FileName="diploma_project/Program.cs" Line="21" Column="14" />
+      <File FileName="diploma_project/Classes/NumberSplits.cs" Line="46" Column="23" />
+      <File FileName="diploma_project/Classes/PermutationDictionary.cs" Line="117" Column="1" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>

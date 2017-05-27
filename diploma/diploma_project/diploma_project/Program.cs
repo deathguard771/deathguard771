@@ -18,7 +18,7 @@ namespace diploma_project
 				}
 			}
 			
-			var pn = 3;
+			var pn = 2;
 			var vc = pn * 2;
 
 			using (var fs = File.AppendText ("temp.txt"))

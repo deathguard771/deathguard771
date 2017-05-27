@@ -47,7 +47,7 @@ namespace diploma_project
 			}
 		});
 		/// <summary>
-		/// "Сравнение двух перестановок"
+		/// "Сравнение двух перестановок" с точки зрения циклической структуры
 		/// </summary>
 		/// <param name="p1">P1.</param>
 		/// <param name="p2">P2.</param>
@@ -59,7 +59,6 @@ namespace diploma_project
 			}
 			for (int i = 0; i < p1.NotTrivialCycles.Count; i++)
 			{
-				//if (p1.NotTrivialCycles [i].Length != p2.NotTrivialCycles [i].Length)
 				if (p2.NotTrivialCycles.Where(c => c.Length == p1.NotTrivialCycles[i].Length).Count() == 0)
 				{
 					return false;

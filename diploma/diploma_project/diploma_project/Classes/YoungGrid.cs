@@ -27,7 +27,17 @@ namespace diploma_project
 				pd.Split.Add (i);
 				sigmas.Add (new List<PermutationDictionary> { pd });
 			}
-			//sigmas [0] [0].Print ();
+
+			var maxOrder = sigmas.Max (kvp => kvp.Max(kvp2 => kvp2.GetMaxOrder()));
+
+			foreach (var item in sigmas)
+			{
+				foreach (var item2 in item)
+				{
+					item2.SetOrder (maxOrder);
+				}
+			}
+
 			for (int i = 2; i <= degree; i++)
 			{
 				var ls = NumberSplits.GenerateSplits (i);
@@ -36,12 +46,12 @@ namespace diploma_project
 					if (split.Count > 1)
 					{
 						var res = new PermutationDictionary ();
+						//split.Reverse ();
 						foreach (var elem in split)
 						{
 							res = res * sigmas [elem - 1] [0];
 						}
 						res.Split.AddRange (split);
-						//res.ClearEmptyEntries ();
 						sigmas [i - 1].Add (res);
 					}
 				}
@@ -75,13 +85,32 @@ namespace diploma_project
 				}
 			}*/
 
-			//var a = 0;
-
 			foreach (var item in sigmas)
 			{
 				foreach (var item2 in item)
 				{
-					item2.Print2 (Output.File, "temp.txt", " = {" + string.Join(", ", item2.Split) + "}");
+					item2.Print2 (Output.File, "temp.txt", " = {" + string.Join (", ", item2.Split) + "}");
+					item2.Print (Output.File, "(" + string.Join (", ", item2.Split) + ").txt", item2.Text.Replace(" + ", "\n"));
+					/*if (flag)
+					{
+						var sum = 0;
+
+						foreach (var kvp in item2)
+						{
+							if (Permutation.Compare(kvp.Key, p))
+							{
+								using (var fs = File.AppendText ("error.txt"))
+								{
+									sum += kvp.Value;
+									fs.WriteLine (kvp.Value + "(" + kvp.Key.Text + ")");
+								}
+							}
+						}
+						using (var fs = File.AppendText ("error.txt"))
+						{
+							fs.WriteLine (sum);
+						}
+					}*/
 				}
 			}
 		}
