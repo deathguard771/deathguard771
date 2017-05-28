@@ -10,10 +10,8 @@ namespace diploma_project
 		public static void Main (string[] args)
 		{
 			var files = Directory.GetFiles (AppDomain.CurrentDomain.BaseDirectory);
-			foreach (var f in files)
-			{
-				if (f.EndsWith (".txt"))
-				{
+			foreach (var f in files) {
+				if (f.EndsWith (".txt")) {
 					File.Delete (f);
 				}
 			}
@@ -21,15 +19,14 @@ namespace diploma_project
 			var pn = 2;
 			var vc = pn * 2;
 
-			using (var fs = File.AppendText ("temp.txt"))
-			{
+			using (var fs = File.AppendText ("temp.txt")) {
 				fs.WriteLine ("До " + pn + " степени.");
 				fs.WriteLine (vc + " переменных.");
 				fs.WriteLine ();
 			}
 
 			YoungGrid.Generate (pn, vc);
-
+			var b = 0;
 			/*var length = 10;
 
 			var ls = new List<PermutationDictionary> ();
