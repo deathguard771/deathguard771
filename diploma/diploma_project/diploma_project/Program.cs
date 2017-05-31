@@ -26,7 +26,8 @@ namespace diploma_project
 			}
 
 			YoungGrid.Generate (pn, vc);
-			var b = 0;
+			Console.WriteLine("Ready!");
+			Console.ReadLine();
 			/*var length = 10;
 
 			var ls = new List<PermutationDictionary> ();

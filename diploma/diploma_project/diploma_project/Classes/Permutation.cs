@@ -301,31 +301,55 @@ namespace diploma_project
 			var result = new Permutation (p1.order, cls);*/
 			#endregion
 			var result = new Permutation (p1.order);
+			/*var ls = new List<int>();
 			foreach (var cycle in p1.cycles)
 			{
-				var ls = new List<int> ();
+				ls.AddRange(cycle.Elements);
+			}
+			ls.Sort();
+			var newLs = new List<int>();
+			foreach (var num in ls)
+			{
+				var res = p2.Apply(p1.Apply(num));
+				if (newLs.Contains(res))
+				{
+					result.AddCycle(newLs.ToArray());
+					newLs = new List<int>();
+				}
+				else
+				{
+					newLs.Add(res);
+				}
+			}
+			if (newLs.Count != 0)
+			{
+				result.AddCycle(newLs.ToArray());
+			}*/
+			foreach (var cycle in p1.cycles)
+			{
+				var ls = new List<int>();
 				foreach (var elem in cycle.Elements)
 				{
-					if (result.cycles.Count(c => c.Contains (elem)) == 0)
+					if (result.cycles.Count(c => c.Contains(elem)) == 0)
 					{
-						ls.Add (elem);
-						break;
+						ls.Add(elem);
+						var i = 0;
+						while (i < ls.Count)
+						{
+							var f = p1.Apply(ls[i]);
+							var s = p2.Apply(f);
+							if (!ls.Contains(s))
+							{
+								ls.Add(s);
+							}
+							i++;
+						}
+						if (ls.Count > 0)
+						{
+							result.AddCycle(ls.ToArray());
+							ls = new List<int>();
+						}
 					}
-				}
-				var i = 0;
-				while (i < ls.Count)
-				{
-					var f = p1.Apply(ls[i]);
-					var s = p2.Apply(f);
-					if (!ls.Contains(s))
-					{
-						ls.Add(s);
-					}
-					i++;
-				}
-				if (ls.Count > 0)
-				{
-					result.AddCycle (ls.ToArray ());
 				}
 			}
 			result.Normalize ();

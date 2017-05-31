@@ -1,17 +1,22 @@
-﻿<Properties StartupItem="diploma_project/diploma_project.csproj">
+﻿<Properties StartupConfiguration="{4B56E5C1-827E-4050-81E6-FC36F5A9FE81}|Default">
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug|x86" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="diploma_project/Classes/PermutationDictionary.cs">
-    <Files>
-      <File FileName="diploma_project/Classes/YoungGrid.cs" Line="59" Column="4" />
-      <File FileName="diploma_project/Program.cs" Line="21" Column="14" />
-      <File FileName="diploma_project/Classes/NumberSplits.cs" Line="46" Column="23" />
-      <File FileName="diploma_project/Classes/PermutationDictionary.cs" Line="117" Column="1" />
-    </Files>
-  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
     <BreakpointStore>
       <Breakpoint file="/home/deathguard771/study/pmim-21/diploma_project/diploma_project/Classes/BinomialCoefficients.cs" line="17" column="1" />
     </BreakpointStore>
   </MonoDevelop.Ide.DebuggingService.Breakpoints>
-  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+  <MonoDevelop.Ide.Workbench ActiveDocument="diploma_project\Program.cs">
+    <Files>
+      <File FileName="diploma_project\Classes\YoungGrid.cs" Line="27" Column="21" />
+      <File FileName="diploma_project\Classes\PermutationDictionary.cs" Line="215" Column="43" />
+      <File FileName="diploma_project\Classes\Permutation.cs" Line="111" Column="1" />
+      <File FileName="diploma_project\Classes\ElementarySymmetricPolynomial.cs" Line="75" Column="45" />
+      <File FileName="diploma_project\Classes\YJMElement.cs" Line="154" Column="1" />
+      <File FileName="diploma_project\Program.cs" Line="20" Column="20" />
+      <File FileName="diploma_project\Classes\Cycle.cs" Line="54" Column="1" />
+    </Files>
+  </MonoDevelop.Ide.Workbench>
+  <MultiItemStartupConfigurations />
+  <MonoDevelop.Ide.ItemProperties.diploma__project PreferredExecutionTarget="MonoDevelop.Default" />
 </Properties>

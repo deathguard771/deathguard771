@@ -122,7 +122,7 @@ namespace diploma_project
 				}
 				return ((kvp.Value / cnt) != 1 ? (kvp.Value / cnt).ToString() : "") + (kvp.Key.NotTrivialCycles.Count > 0 ? ("(" + kvp.Key.Text + ")") : "");
 			});
-			Print(output, path, string.Join(" + ", txt) + addText + "\n");
+			Print(output, path, string.Join(" + ", txt) + addText + "\r\n");
 			//res = flag;
 			//return res2;
 		}
@@ -137,6 +137,7 @@ namespace diploma_project
 			{
 				res.Add (kvp.Key, kvp.Value);
 			}
+			res.Split.AddRange(p1.Split);
 			return res;
 		}
 		/// <summary>
@@ -187,7 +188,7 @@ namespace diploma_project
 		{
 			return this.Keys.Max (t => t.Order);
 		}
-
+		static int k = 1;
 		/// <param name="p1">P1.</param>
 		/// <param name="p2">P2.</param>
 		public static PermutationDictionary operator * (PermutationDictionary p1, PermutationDictionary p2)
@@ -205,6 +206,7 @@ namespace diploma_project
 					{
 						throw new Exception ("Две нулевых штуки.");
 					}
+			var ls = new List<List<string>>();
 			foreach (var kvp1 in p1)
 			{
 				foreach (var kvp2 in p2)
@@ -213,6 +215,9 @@ namespace diploma_project
 					var resVal = kvp1.Value * kvp2.Value;
 					res.Add( resKey, resVal);
 				}
+			}
+			if (p1.Split.Count == 1 && p1.Split[0] == 2 && p2.Split.Count == 1 && p2.Split[0] == 1)
+			{
 			}
 			return res;
 		}

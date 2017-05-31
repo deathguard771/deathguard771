@@ -90,7 +90,7 @@ namespace diploma_project
 				foreach (var item2 in item)
 				{
 					item2.Print2 (Output.File, "temp.txt", " = {" + string.Join (", ", item2.Split) + "}");
-					item2.Print (Output.File, "(" + string.Join (", ", item2.Split) + ").txt", item2.Text.Replace(" + ", "\n"));
+					//item2.Print (Output.File, "(" + string.Join (", ", item2.Split) + ").txt", item2.Text.Replace(" + ", "\r\n"));
 					/*if (flag)
 					{
 						var sum = 0;

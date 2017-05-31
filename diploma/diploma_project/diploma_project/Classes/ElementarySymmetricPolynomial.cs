@@ -70,8 +70,9 @@ namespace diploma_project
 			var res = new PermutationDictionary ();
 			foreach (var term in terms)
 			{
-				var tmp = args[term[0] - 1];
-				for (int i = 1; i < term.Count; i++)
+				var tmp = args[term[term.Count - 1] - 1];
+				//for (int i = 1; i < term.Count; i++)
+				for (int i = term.Count - 2; i >= 0; i--)
 				{
 					tmp = tmp * args [term [i] - 1];
 				}
