@@ -8,7 +8,7 @@ namespace diploma_project
 	/// <summary>
 	/// Решетка Юнга
 	/// </summary>
-	public class YoungGrid
+	public static class YoungGrid
 	{
 		/// <summary>
 		/// Генерация

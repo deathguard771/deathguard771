@@ -16,7 +16,7 @@ namespace diploma_project
 				}
 			}
 			
-			var pn = 2;
+			var pn = 5;
 			var vc = pn * 2;
 
 			using (var fs = File.AppendText ("temp.txt")) {
@@ -27,6 +27,7 @@ namespace diploma_project
 
 			YoungGrid.Generate (pn, vc);
 			Console.WriteLine("Ready!");
+			//ErrorBeep();
 			Console.ReadLine();
 			/*var length = 10;
 
@@ -38,6 +39,37 @@ namespace diploma_project
 					ls.Add (Generate (i, pn, Output.File));
 				}
 			}*/
+		}
+
+		public static void SuccessBeep()
+		{
+			for (int i = 0; i< 10; i++)
+			{
+				for (int j = 0; j< 3; j++)
+				{
+					Console.Beep(1000, 250);
+				}
+				System.Threading.Thread.Sleep(500);
+			}
+		}
+
+		public static void ErrorBeep()
+		{
+			for (int j = 0; j < 3; j++)
+			{
+				Console.Beep(500, 500);
+			}
+			System.Threading.Thread.Sleep(100);
+			for (int j = 0; j < 3; j++)
+			{
+				Console.Beep(500, 250);
+			}
+			System.Threading.Thread.Sleep(100);
+			for (int j = 0; j < 3; j++)
+			{
+				Console.Beep(500, 500);
+			}
+			System.Threading.Thread.Sleep(500);
 		}
 	}
 }

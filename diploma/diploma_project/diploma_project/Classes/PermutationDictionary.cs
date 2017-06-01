@@ -119,6 +119,7 @@ namespace diploma_project
 					//flag = true;
 					//res2 = kvp.Key;
 					Console.WriteLine("Error. Order = " + kvp.Key.Order + "; Perm = " + kvp.Key.Text + "; Count = " + kvp.Value + "; PermCount = " + cnt + "; Reminder = " + (kvp.Value % cnt));
+					//MainClass.ErrorBeep();
 				}
 				return ((kvp.Value / cnt) != 1 ? (kvp.Value / cnt).ToString() : "") + (kvp.Key.NotTrivialCycles.Count > 0 ? ("(" + kvp.Key.Text + ")") : "");
 			});

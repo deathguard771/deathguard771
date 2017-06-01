@@ -152,8 +152,8 @@ namespace diploma_project
 			}
 			return new YJMElement(result);
 		}
-		/// <param name="p1">Первый YJM-элемент</param>
-		/// <param name="p2">Второй YJM-элемент</param>
+		/// <param name="y1">Первый YJM-элемент</param>
+		/// <param name="y2">Второй YJM-элемент</param>
 		public static bool operator ==(YJMElement y1, YJMElement y2)
 		{
 			var result = true;

@@ -10,3 +10,14 @@ D:\Study\pmim-21\diploma_project\deathguard771-master\deathguard771-master\diplo
 D:\Study\pmim-21\diploma_project\deathguard771-master\deathguard771-master\diploma\diploma_project\diploma_project\obj\x86\Debug\diploma_project.csprojResolveAssemblyReference.cache
 D:\Study\pmim-21\diploma_project\deathguard771-master\deathguard771-master\diploma\diploma_project\diploma_project\obj\x86\Debug\diploma_project.exe
 D:\Study\pmim-21\diploma_project\deathguard771-master\deathguard771-master\diploma\diploma_project\diploma_project\obj\x86\Debug\diploma_project.pdb
+D:\Study\pmim-21\diploma_project\deathguard771\diploma\diploma_project\diploma_project\bin\Debug\diploma_project.exe
+D:\Study\pmim-21\diploma_project\deathguard771\diploma\diploma_project\diploma_project\bin\Debug\diploma_project.pdb
+D:\Study\pmim-21\diploma_project\deathguard771\diploma\diploma_project\diploma_project\bin\Debug\mscorlib.dll
+D:\Study\pmim-21\diploma_project\deathguard771\diploma\diploma_project\diploma_project\bin\Debug\ru\mscorlib.resources.dll
+D:\Study\pmim-21\diploma_project\deathguard771\diploma\diploma_project\diploma_project\bin\Debug\normidna.nlp
+D:\Study\pmim-21\diploma_project\deathguard771\diploma\diploma_project\diploma_project\bin\Debug\normnfc.nlp
+D:\Study\pmim-21\diploma_project\deathguard771\diploma\diploma_project\diploma_project\bin\Debug\normnfd.nlp
+D:\Study\pmim-21\diploma_project\deathguard771\diploma\diploma_project\diploma_project\bin\Debug\normnfkc.nlp
+D:\Study\pmim-21\diploma_project\deathguard771\diploma\diploma_project\diploma_project\bin\Debug\normnfkd.nlp
+D:\Study\pmim-21\diploma_project\deathguard771\diploma\diploma_project\diploma_project\obj\x86\Debug\diploma_project.exe
+D:\Study\pmim-21\diploma_project\deathguard771\diploma\diploma_project\diploma_project\obj\x86\Debug\diploma_project.pdb
