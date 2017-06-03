@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace diploma_project
+﻿namespace diploma_project
 {
 	/// <summary>
 	/// Вывод

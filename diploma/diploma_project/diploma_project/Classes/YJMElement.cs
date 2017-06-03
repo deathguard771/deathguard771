@@ -30,10 +30,7 @@ namespace diploma_project
 		/// </summary>
 		public List<Permutation> Permutations
 		{
-			get
-			{
-				return permutations;
-			}
+			get { return permutations; }
 		}
 		/// <summary>
 		/// Текствое представление
@@ -62,7 +59,7 @@ namespace diploma_project
 		/// <summary>
 		/// Инициализирует экземпляр класса <see cref="diploma_project.YJMElement"/>
 		/// </summary>
-		/// <param name="ord">Список перестановок</param>
+		/// <param name="perm">Список перестановок</param>
 		public YJMElement(List<Permutation> perm)
 		{
 			permutations = new List<Permutation>();
@@ -117,10 +114,10 @@ namespace diploma_project
 		/// <summary>
 		/// Определяет равен ли объект <see cref="System.Object"/> данному объекту <see cref="diploma_project.YJMElement"/>.
 		/// </summary>
-		/// <param name="p1">Объект, который нужно сравнить</param>
-		public override bool Equals(Object y1)
+		/// <param name="obj">Объект, который нужно сравнить</param>
+		public override bool Equals(Object obj)
 		{
-			return y1 is YJMElement ? this == y1 as YJMElement : false;
+			return obj is YJMElement && this == obj as YJMElement;
 		}
 		/// <summary>
 		/// Возвращает хэш-код объекта <see cref="diploma_project.YJMElement"/>
@@ -130,8 +127,8 @@ namespace diploma_project
 			return permutations.GetHashCode ();
 		}
 
-		/// <param name="p1">Первый YJM-элемент</param>
-		/// <param name="p2">Второй YJM-элемент</param>
+		/// <param name="y1">Первый YJM-элемент</param>
+		/// <param name="y2">Второй YJM-элемент</param>
 		public static YJMElement operator *(YJMElement y1, YJMElement y2)
 		{
 			if (y1.order > y2.order)
@@ -156,26 +153,24 @@ namespace diploma_project
 		/// <param name="y2">Второй YJM-элемент</param>
 		public static bool operator ==(YJMElement y1, YJMElement y2)
 		{
-			var result = true;
 			if (y1.order == y2.order)
 			{
 				for (int i = 0; i < y1.order; i++)
 				{
 					if (y1.permutations [i] != y2.permutations [i])
 					{
-						result = false;
-						break;
+						return false;
 					}
 				}
 			}
 			else
 			{
-				result =  false;
+				return false;
 			}
-			return result;
+			return true;
 		}
-		/// <param name="p1">Первый YJM-элемент</param>
-		/// <param name="p2">Второй YJM-элемент</param>
+		/// <param name="y1">Первый YJM-элемент</param>
+		/// <param name="y2">Второй YJM-элемент</param>
 		public static bool operator !=(YJMElement y1, YJMElement y2)
 		{
 			return !(y1 == y2);

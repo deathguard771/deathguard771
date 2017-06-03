@@ -3,18 +3,19 @@
   <MonoDevelop.Ide.DebuggingService.PinnedWatches />
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
     <BreakpointStore>
-      <Breakpoint file="/home/deathguard771/study/pmim-21/diploma_project/diploma_project/Classes/BinomialCoefficients.cs" line="17" column="1" />
+      <Breakpoint enabled="false" file="/home/deathguard771/study/pmim-21/diploma_project/diploma_project/Classes/BinomialCoefficients.cs" line="17" column="1" />
+      <Breakpoint file="D:\Study\pmim-21\diploma_project\deathguard771\diploma\diploma_project\diploma_project\Classes\PermutationDictionary.cs" relfile="diploma_project\Classes\PermutationDictionary.cs" line="119" column="1" />
+      <Breakpoint file="D:\Study\pmim-21\diploma_project\deathguard771\diploma\diploma_project\diploma_project\Classes\YoungGrid.cs" relfile="diploma_project\Classes\YoungGrid.cs" line="115" column="1" />
     </BreakpointStore>
   </MonoDevelop.Ide.DebuggingService.Breakpoints>
-  <MonoDevelop.Ide.Workbench ActiveDocument="diploma_project\Classes\YoungGrid.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="diploma_project\Classes\Permutation.cs">
     <Files>
-      <File FileName="diploma_project\Classes\YoungGrid.cs" Line="10" Column="16" />
-      <File FileName="diploma_project\Classes\PermutationDictionary.cs" Line="122" Column="8" />
-      <File FileName="diploma_project\Classes\Permutation.cs" Line="111" Column="5" />
-      <File FileName="diploma_project\Classes\ElementarySymmetricPolynomial.cs" Line="75" Column="45" />
-      <File FileName="diploma_project\Classes\YJMElement.cs" Line="156" Column="22" />
-      <File FileName="diploma_project\Classes\Cycle.cs" Line="130" Column="4" />
-      <File FileName="diploma_project\Program.cs" Line="32" Column="22" />
+      <File FileName="diploma_project\Program.cs" Line="19" Column="20" />
+      <File FileName="diploma_project\Classes\YoungGrid.cs" Line="111" Column="8" />
+      <File FileName="diploma_project\Classes\Cycle.cs" Line="63" Column="4" />
+      <File FileName="diploma_project\Classes\Factorial.cs" Line="27" Column="1" />
+      <File FileName="diploma_project\Classes\PermutationDictionary.cs" Line="102" Column="26" />
+      <File FileName="diploma_project\Classes\Permutation.cs" Line="53" Column="22" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MultiItemStartupConfigurations />

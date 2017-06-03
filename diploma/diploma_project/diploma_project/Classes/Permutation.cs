@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 
 namespace diploma_project
 {
@@ -10,13 +9,13 @@ namespace diploma_project
 	/// </summary>
 	public class Permutation
 	{
+		/// <summary>
+		/// Количество перестановок определенного циклического типа
+		/// </summary>
+		/// <param name="p">Перестановка</param>
 		public static int GetPermutationsCount(Permutation p)
 		{
 			var dict = new Dictionary<int, int> ();
-			/*for (int i = 1; i <= p.Order; i++)
-			{
-				dict.Add (i, 0);
-			}*/
 			foreach (var cycle in p.cycles)
 			{
 				if (!dict.ContainsKey (cycle.Length))
@@ -57,13 +56,24 @@ namespace diploma_project
 			{
 				return false;
 			}
-			for (int i = 0; i < p1.NotTrivialCycles.Count; i++)
+			var fLen = p1.NotTrivialCycles.Select(cycle => cycle.Length).ToList();
+			var sLen = p2.NotTrivialCycles.Select(cycle => cycle.Length).ToList();
+			fLen.Sort();
+			sLen.Sort();
+			for (int i = 0; i < fLen.Count; i++)
 			{
-				if (p2.NotTrivialCycles.Where(c => c.Length == p1.NotTrivialCycles[i].Length).Count() == 0)
+				if (fLen[i] != sLen[i])
 				{
 					return false;
 				}
 			}
+			/*for (int i = 0; i < p1.NotTrivialCycles.Count; i++)
+			{
+				if (p2.NotTrivialCycles.Count(c => c.Length == p1.NotTrivialCycles[i].Length) == 0)
+				{
+					return false;
+				}
+			}*/
 			return true;
 		}
 		/// <summary>
@@ -82,7 +92,7 @@ namespace diploma_project
 		{
 			get
 			{
-				return this.cycles.Where (c => c.Elements.Length > 1).ToList ();
+				return cycles.Where (c => c.Elements.Length > 1).ToList ();
 			}
 		}
 		/// <summary>
@@ -111,7 +121,7 @@ namespace diploma_project
 			}
 		}
 		/// <summary>
-		/// Инициализирует экземпляр класса <see cref="diploma_project.Permutation"/>
+		/// Инициализирует экземпляр класса <see cref="Permutation"/>
 		/// </summary>
 		public Permutation (int o)
 		{
@@ -119,7 +129,7 @@ namespace diploma_project
 			cycles = new List<Cycle> ();
 		}
 		/// <summary>
-		/// Инициализирует экземпляр класса <see cref="diploma_project.Permutation"/>
+		/// Инициализирует экземпляр класса <see cref="Permutation"/>
 		/// </summary>
 		/// <param name="_cycles">Коллекция циклов</param>
 		public Permutation (int o, IEnumerable<Cycle> _cycles)
@@ -128,7 +138,7 @@ namespace diploma_project
 			InitPermuatation(_cycles);
 		}
 		/// <summary>
-		/// Инициализирует экземпляр класса <see cref="diploma_project.Permutation"/>
+		/// Инициализирует экземпляр класса <see cref="Permutation"/>
 		/// </summary>
 		/// <param name="_cycles">Циклы</param>
 		public Permutation (int o, params Cycle[] _cycles)
@@ -137,9 +147,9 @@ namespace diploma_project
 			InitPermuatation(_cycles.ToList());
 		}
 		/// <summary>
-		/// Инициализирует экземпляр класса <see cref="diploma_project.Permutation"/>
+		/// Инициализирует экземпляр класса <see cref="Permutation"/>
 		/// </summary>
-		/// <param name="_cycles">Массивы элементов циклов</param>
+		/// <param name="cycles">Массивы элементов циклов</param>
 		public Permutation(int o, params int[][] cycles)
 		{
 			order = o;
@@ -165,7 +175,7 @@ namespace diploma_project
 		private void Normalize()
 		{
 			for (int i = 1; i <= order; i++)
-			{			
+			{
 				if (cycles.Count (c => c.Contains (i)) == 0)
 				{
 					cycles.Add (new Cycle (new [] { i }));
@@ -238,15 +248,15 @@ namespace diploma_project
 			Console.WriteLine (Text);
 		}
 		/// <summary>
-		/// Определяет равен ли объект <see cref="System.Object"/> данному объекту <see cref="diploma_project.Permutation"/>.
+		/// Определяет равен ли объект <see cref="object"/> данному объекту <see cref="Permutation"/>.
 		/// </summary>
-		/// <param name="p1">Объект, который нужно сравнить</param>
-		public override bool Equals(Object p1)
+		/// <param name="obj">Объект, который нужно сравнить</param>
+		public override bool Equals(object obj)
 		{
-			return p1 is Permutation ? this == p1 as Permutation : false;
+			return obj is Permutation && this == obj as Permutation;
 		}
 		/// <summary>
-		/// Возвращает хэш-код объекта <see cref="diploma_project.Permutation"/>
+		/// Возвращает хэш-код объекта <see cref="Permutation"/>
 		/// </summary>
 		public override int GetHashCode()
 		{
@@ -261,70 +271,15 @@ namespace diploma_project
 			{
 				if (p1.order > p2.order)
 				{
-					p2.SetOrder (p1.order);
+					p2.SetOrder(p1.order);
 				}
 				else if (p1.order < p2.order)
 				{
-					p1.SetOrder (p2.order);
+					p1.SetOrder(p2.order);
 				}
 				//throw new ArgumentException ("Порядок перестановок не совпадает");
 			}
-			#region parallel
-			/*var cls = new List<Cycle> ();
-			Parallel.ForEach (p1.cycles, cycle => 
-			{
-				var ls = new List<int> ();
-				foreach (var elem in cycle.Elements)
-				{
-					if (cls.Count(c => c.Contains (elem)) == 0)
-					{
-						ls.Add (elem);
-						break;
-					}
-				}
-				var i = 0;
-				while (i < ls.Count)
-				{
-					var f = p1.Apply(ls[i]);
-					var s = p2.Apply(f);
-					if (!ls.Contains(s))
-					{
-						ls.Add(s);
-					}
-					i++;
-				}
-				if (ls.Count > 0)
-				{
-					cls.Add(new Cycle(ls.ToArray ()));
-				}
-			});
-			var result = new Permutation (p1.order, cls);*/
-			#endregion
 			var result = new Permutation (p1.order);
-			/*var ls = new List<int>();
-			foreach (var cycle in p1.cycles)
-			{
-				ls.AddRange(cycle.Elements);
-			}
-			ls.Sort();
-			var newLs = new List<int>();
-			foreach (var num in ls)
-			{
-				var res = p2.Apply(p1.Apply(num));
-				if (newLs.Contains(res))
-				{
-					result.AddCycle(newLs.ToArray());
-					newLs = new List<int>();
-				}
-				else
-				{
-					newLs.Add(res);
-				}
-			}
-			if (newLs.Count != 0)
-			{
-				result.AddCycle(newLs.ToArray());
-			}*/
 			foreach (var cycle in p1.cycles)
 			{
 				var ls = new List<int>();
@@ -336,8 +291,7 @@ namespace diploma_project
 						var i = 0;
 						while (i < ls.Count)
 						{
-							var f = p1.Apply(ls[i]);
-							var s = p2.Apply(f);
+							var s = p2.Apply(p1.Apply(ls[i]));
 							if (!ls.Contains(s))
 							{
 								ls.Add(s);
@@ -359,23 +313,21 @@ namespace diploma_project
 		/// <param name="p2">Вторая перестановка</param>
 		public static bool operator ==(Permutation p1, Permutation p2)
 		{
-			var result = true;
 			if (p1.order == p2.order)
 			{
 				for (int i = 0; i < p1.cycles.Count; i++)
 				{
 					if (p1.cycles [i] != p2.cycles [i])
 					{
-						result = false;
-						break;
+						return false;
 					}
 				}
 			}
 			else
 			{
-				result =  false;
+				return false;
 			}
-			return result;
+			return true;
 		}
 		/// <param name="p1">Первая перестановка</param>
 		/// <param name="p2">Вторая перестановка</param>

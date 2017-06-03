@@ -1,17 +1,30 @@
-﻿using System;
+﻿using System.Collections.Generic;
 
 namespace diploma_project
 {
+	/// <summary>
+	/// Класс для вычисления факториалов
+	/// </summary>
 	public static class Factorial
 	{
+		/// <summary>
+		/// Вычисленные факториалы
+		/// </summary>
+		private static List<int> factorials = new List<int> { 1, 1 };
+		/// <summary>
+		/// Вычислить факториал числа
+		/// </summary>
+		/// <param name="num">Число</param>
 		public static int Get(int num)
 		{
-			var res = 1;
-			for (int i = 2; i <= num; i++)
+			if (num >= factorials.Count)
 			{
-				res *= i;
+				for (int i = factorials.Count; i <= num; i++)
+				{
+					factorials.Add(factorials[i - 1] * i);
+				}
 			}
-			return res;
+			return factorials[num];
 		}
 	}
 }

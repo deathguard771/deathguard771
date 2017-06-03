@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace diploma_project
+﻿namespace diploma_project
 {
 	/// <summary>
 	/// Класс для вычисления биномиальных коэффициентов
@@ -9,7 +7,7 @@ namespace diploma_project
 	{
 		/// <summary>
 		/// Вычисляет биномиальный коэффициент
-		/// </summary></returns>
+		/// </summary>
 		/// <param name="n">N.</param>
 		/// <param name="k">K.</param>
 		public static int GetBinomialCoefficient(int n, int k)

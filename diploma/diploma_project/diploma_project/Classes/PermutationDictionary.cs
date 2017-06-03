@@ -11,13 +11,18 @@ namespace diploma_project
 	public class PermutationDictionary : Dictionary<Permutation, int>
 	{
 		/// <summary>
+		/// Разбиение, соответствующее объекту
+		/// </summary>
+		public List<int> Split = new List<int>();
+
+		/// <summary>
 		/// Текстовое представление
 		/// </summary>
 		public string Text
 		{
 			get
 			{
-				return string.Join (" + ", this.Select (kvp => 
+				return string.Join(" + ", this.Select(kvp =>
 				{
 					if (kvp.Value < 1)
 					{
@@ -33,23 +38,21 @@ namespace diploma_project
 					}
 				}));
 			}
-   		}
-			
-		public List<int> Split = new List<int> ();
+		}
 
 		/// <summary>
 		/// Добавляет перестановку в словарь
 		/// </summary>
 		/// <param name="p">Перестановка</param>
-		public void Add(Permutation p, int count = 1)
+		public new void Add(Permutation p, int count = 1)
 		{
-			if (this.ContainsKey (p))
+			if (ContainsKey(p))
 			{
 				this[p] += count;
 			}
 			else
 			{
-				base.Add (p, count);
+				base.Add(p, count);
 			}
 		}
 		/// <summary>
@@ -60,7 +63,7 @@ namespace diploma_project
 		{
 			foreach (var i in p)
 			{
-				this.Add (i);
+				Add(i);
 			}
 		}
 		/// <summary>
@@ -74,14 +77,14 @@ namespace diploma_project
 			}
 			if (output == Output.Console)
 			{
-				Console.WriteLine (text);
+				Console.WriteLine(text);
 			}
 			else if (output == Output.File)
 			{
-				using (var fs = File.AppendText (path))
+				using (var fs = File.AppendText(path))
 				{
-					fs.Write (text);
-					fs.WriteLine ();
+					fs.Write(text);
+					fs.WriteLine();
 				}
 			}
 		}
@@ -90,9 +93,7 @@ namespace diploma_project
 		/// </summary>
 		public void Print2(Output output = Output.Console, string path = "", string addText = "")
 		{
-			var dictCounts = new Dictionary<Permutation, int> ();
-			//var flag = false;
-			//res = false;
+			var dictCounts = new Dictionary<Permutation, int>();
 			foreach (var kvp in this)
 			{
 				var flagInc = false;
@@ -100,32 +101,28 @@ namespace diploma_project
 				{
 					if (Permutation.Compare(kvp2.Key, kvp.Key))
 					{
-						dictCounts [kvp2.Key] += kvp.Value;
+						dictCounts[kvp2.Key] += kvp.Value;
 						flagInc = true;
 						break;
 					}
 				}
 				if (!flagInc)
 				{
-					dictCounts.Add (kvp.Key, kvp.Value);
+					dictCounts.Add(kvp.Key, kvp.Value);
 				}
 			}
-			//Permutation res2 = null;
-			var txt = dictCounts.Select(kvp => 
+			var txt = dictCounts.Select(kvp =>
 			{
 				var cnt = Permutation.GetPermutationsCount(kvp.Key);
 				if (kvp.Value % cnt > 0)
 				{
-					//flag = true;
-					//res2 = kvp.Key;
 					Console.WriteLine("Error. Order = " + kvp.Key.Order + "; Perm = " + kvp.Key.Text + "; Count = " + kvp.Value + "; PermCount = " + cnt + "; Reminder = " + (kvp.Value % cnt));
-					//MainClass.ErrorBeep();
+					MainClass.ErrorBeep();
+					Console.ReadKey();
 				}
 				return ((kvp.Value / cnt) != 1 ? (kvp.Value / cnt).ToString() : "") + (kvp.Key.NotTrivialCycles.Count > 0 ? ("(" + kvp.Key.Text + ")") : "");
 			});
 			Print(output, path, string.Join(" + ", txt) + addText + "\r\n");
-			//res = flag;
-			//return res2;
 		}
 		/// <summary>
 		/// Copy the specified PermutationDictionary.
@@ -133,10 +130,10 @@ namespace diploma_project
 		/// <param name="p1">P1.</param>
 		public static PermutationDictionary Copy(PermutationDictionary p1)
 		{
-			var res = new PermutationDictionary ();
+			var res = new PermutationDictionary();
 			foreach (var kvp in p1)
 			{
-				res.Add (kvp.Key, kvp.Value);
+				res.Add(kvp.Key, kvp.Value);
 			}
 			res.Split.AddRange(p1.Split);
 			return res;
@@ -146,17 +143,17 @@ namespace diploma_project
 		/// </summary>
 		public void ClearEmptyEntries()
 		{
-			var keys = new List<Permutation> ();
+			var keys = new List<Permutation>();
 			foreach (var kvp in this)
 			{
 				if (kvp.Key.NotTrivialCycles.Count == 0)
 				{
-					keys.Add (kvp.Key);
+					keys.Add(kvp.Key);
 				}
 			}
 			foreach (var key in keys)
 			{
-				this.Remove (key);
+				Remove(key);
 			}
 		}
 		/// <summary>
@@ -167,7 +164,7 @@ namespace diploma_project
 		{
 			foreach (var kvp in this)
 			{
-				kvp.Key.SetOrder (newOrder);
+				kvp.Key.SetOrder(newOrder);
 			}
 		}
 		/// <summary>
@@ -175,11 +172,7 @@ namespace diploma_project
 		/// </summary>
 		public void SetOrder()
 		{
-			var newOrder = GetMaxOrder();
-			foreach (var kvp in this)
-			{
-				kvp.Key.SetOrder (newOrder);
-			}
+			SetOrder(GetMaxOrder());
 		}
 		/// <summary>
 		/// Gets the max order.
@@ -187,38 +180,31 @@ namespace diploma_project
 		/// <returns>The max order.</returns>
 		public int GetMaxOrder()
 		{
-			return this.Keys.Max (t => t.Order);
+			return Keys.Max(t => t.Order);
 		}
-		static int k = 1;
 		/// <param name="p1">P1.</param>
 		/// <param name="p2">P2.</param>
-		public static PermutationDictionary operator * (PermutationDictionary p1, PermutationDictionary p2)
+		public static PermutationDictionary operator *(PermutationDictionary p1, PermutationDictionary p2)
 		{
-			var res = new PermutationDictionary ();
+			var res = new PermutationDictionary();
 			if (p1.Count == 0 && p2.Count > 0)
 			{
-				return Copy (p2);
+				return Copy(p2);
 			}
 			else if (p2.Count == 0 && p1.Count > 0)
-				{
-					return Copy (p1);
-				}
-				else if (p1.Count == 0 && p2.Count == 0)
-					{
-						throw new Exception ("Две нулевых штуки.");
-					}
-			var ls = new List<List<string>>();
+			{
+				return Copy(p1);
+			}
+			else if (p1.Count == 0 && p2.Count == 0)
+			{
+				throw new Exception("Две нулевых штуки.");
+			}
 			foreach (var kvp1 in p1)
 			{
 				foreach (var kvp2 in p2)
 				{
-					var resKey = kvp1.Key * kvp2.Key;
-					var resVal = kvp1.Value * kvp2.Value;
-					res.Add( resKey, resVal);
+					res.Add(kvp1.Key * kvp2.Key, kvp1.Value * kvp2.Value);
 				}
-			}
-			if (p1.Split.Count == 1 && p1.Split[0] == 2 && p2.Split.Count == 1 && p2.Split[0] == 1)
-			{
 			}
 			return res;
 		}

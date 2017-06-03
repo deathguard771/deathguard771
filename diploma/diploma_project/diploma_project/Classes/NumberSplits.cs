@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 
 namespace diploma_project
@@ -20,37 +19,37 @@ namespace diploma_project
 			foreach (var item in _compoz)
 			{
 				fCompoz.Add(new List<int>());
-				item.Sort ((delegate(int x, int y)
+				item.Sort((delegate (int x, int y)
 				{
 					if (x > y)
 					{
 						return -1;
 					}
 					else if (x < y)
-						{
-							return 1;
-						}
-						else
-						{
-							return 0;
-						}
+					{
+						return 1;
+					}
+					else
+					{
+						return 0;
+					}
 				}));
 				fCompoz.Last().AddRange(item);
 				item.Clear();
 			}
-			_compoz.Clear ();
+			_compoz.Clear();
 			for (int i = fCompoz.Count - 1; i >= 0; i--)
 			{
 				for (int j = i - 1; j >= 0; j--)
 				{
-					if (CompareSplits (fCompoz [i], fCompoz [j]))
+					if (CompareSplits(fCompoz[i], fCompoz[j]))
 					{
-						fCompoz.RemoveAt (i);
+						fCompoz.RemoveAt(i);
 						break;
 					}
 				}
 			}
-			fCompoz.Sort (delegate(List<int> x, List<int> y)
+			fCompoz.Sort(delegate (List<int> x, List<int> y)
 			{
 				if (x.Count > y.Count)
 				{
@@ -64,11 +63,11 @@ namespace diploma_project
 				{
 					for (int i = 0; i < x.Count; i++)
 					{
-						if (x [i] > y [i])
+						if (x[i] > y[i])
 						{
 							return -1;
 						}
-						else if (x [i] < y [i])
+						else if (x[i] < y[i])
 						{
 							return 1;
 						}
@@ -93,14 +92,16 @@ namespace diploma_project
 			if (_prev.Sum() == beg)
 			{
 				if (_prev.Count == 0)
+				{
 					_prev.Add(0);
+				}
 				_compoz.Add(new List<int>(_prev));
 			}
 			if (_prev.Count > 0)
 			{
 				_prev.RemoveAt(_prev.Count - 1);
 			}
-   		}
+		}
 		/// <summary>
 		/// Compares the splits2.
 		/// </summary>

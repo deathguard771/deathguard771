@@ -29,7 +29,7 @@ namespace diploma_project
 			}
 		}
 		/// <summary>
-		/// Инициализирует экземпляр класса <see cref="diploma_project.ElementarySymmetricPolynomial"/>
+		/// Инициализирует экземпляр класса <see cref="ElementarySymmetricPolynomial"/>
 		/// </summary>
 		/// <param name="_varCount">Количество переменных</param>
 		/// <param name="_num">Номер элементарного симметрического многочлена</param>
@@ -71,13 +71,11 @@ namespace diploma_project
 			foreach (var term in terms)
 			{
 				var tmp = args[term[term.Count - 1] - 1];
-				//for (int i = 1; i < term.Count; i++)
 				for (int i = term.Count - 2; i >= 0; i--)
 				{
 					tmp = tmp * args [term [i] - 1];
 				}
 				res.Add (tmp.Permutations);
-				//res.AddRange (tmp);
 			}
 			return res;
 		}

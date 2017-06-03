@@ -44,33 +44,24 @@ namespace diploma_project
 		/// </summary>
 		public List<List<int>> Combinations
 		{
-			get
-			{
-				return сombinations;
-			}
+			get { return сombinations; }
 		}
 		/// <summary>
 		/// Текущий номер выборки
 		/// </summary>
 		public int CurrentNumber
 		{
-			get
-			{
-				return сombinations.Count;
-			}
+			get { return сombinations.Count; }
 		}
 		/// <summary>
 		/// Текстовое представление
 		/// </summary>
 		public string Text
 		{
-			get
-			{
-				return string.Join (" ", CurrentCombination);
-			}
+			get { return string.Join (" ", CurrentCombination); }
 		}
 		/// <summary>
-		/// Инициализирует экземпляр класса <see cref="diploma_project.Combination"/>
+		/// Инициализирует экземпляр класса <see cref="Combination"/>
 		/// </summary>
 		/// <param name="_setLength">Количество элементов множества</param>
 		/// <param name="_combinationLength">Количетсов элементов выборки</param>
