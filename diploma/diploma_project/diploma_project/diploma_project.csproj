@@ -40,7 +40,6 @@
     <Compile Include="Classes\Permutation.cs" />
     <Compile Include="Classes\Cycle.cs" />
     <Compile Include="Classes\YJMElement.cs" />
-    <Compile Include="Classes\SymmetricPolynomial.cs" />
     <Compile Include="Classes\ElementarySymmetricPolynomial.cs" />
     <Compile Include="Classes\BinomialCoefficients.cs" />
     <Compile Include="Classes\Combination.cs" />

@@ -7,7 +7,7 @@ namespace diploma_project
 	/// <summary>
 	/// Класс, описывающий элементарный симметрический многочлен
 	/// </summary>
-	public class ElementarySymmetricPolynomial : SymmetricPolynomial
+	public class ElementarySymmetricPolynomial
 	{
 		/// <summary>
 		/// Количество переменных

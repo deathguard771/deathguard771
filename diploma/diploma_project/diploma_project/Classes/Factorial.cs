@@ -10,7 +10,7 @@ namespace diploma_project
 		/// <summary>
 		/// Вычисленные факториалы
 		/// </summary>
-		private static List<int> factorials = new List<int> { 1, 1 };
+		private static readonly List<int> factorials = new List<int> { 1, 1 };
 		/// <summary>
 		/// Вычислить факториал числа
 		/// </summary>
