@@ -52,7 +52,7 @@ namespace diploma_project
 		public int CurrentNumber
 		{
 			get { return сombinations.Count; }
-		}
+		}	
 		/// <summary>
 		/// Текстовое представление
 		/// </summary>

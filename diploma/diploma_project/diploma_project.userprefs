@@ -6,11 +6,15 @@
       <Breakpoint enabled="false" file="/home/deathguard771/study/pmim-21/diploma_project/diploma_project/Classes/BinomialCoefficients.cs" line="17" column="1" />
     </BreakpointStore>
   </MonoDevelop.Ide.DebuggingService.Breakpoints>
-  <MonoDevelop.Ide.Workbench ActiveDocument="diploma_project\Classes\YJMElement.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="diploma_project\Classes\Cycle.cs">
     <Files>
       <File FileName="diploma_project\Program.cs" Line="45" Column="4" />
-      <File FileName="diploma_project\Classes\YoungGrid.cs" Line="88" Column="14" />
-      <File FileName="diploma_project\Classes\YJMElement.cs" Line="158" Column="6" />
+      <File FileName="diploma_project\Classes\BinomialCoefficients.cs" Line="12" Column="6" />
+      <File FileName="diploma_project\Classes\Factorial.cs" Line="19" Column="4" />
+      <File FileName="diploma_project\Classes\NumberSplits.cs" Line="6" Column="30" />
+      <File FileName="diploma_project\Classes\Combination.cs" Line="55" Column="5" />
+      <File FileName="diploma_project\Classes\ElementarySymmetricPolynomial.cs" Line="53" Column="47" />
+      <File FileName="diploma_project\Classes\Cycle.cs" Line="87" Column="12" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MultiItemStartupConfigurations />
