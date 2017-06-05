@@ -6,15 +6,18 @@
       <Breakpoint enabled="false" file="/home/deathguard771/study/pmim-21/diploma_project/diploma_project/Classes/BinomialCoefficients.cs" line="17" column="1" />
     </BreakpointStore>
   </MonoDevelop.Ide.DebuggingService.Breakpoints>
-  <MonoDevelop.Ide.Workbench ActiveDocument="diploma_project\Classes\Cycle.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="diploma_project\Program.cs">
     <Files>
-      <File FileName="diploma_project\Program.cs" Line="45" Column="4" />
+      <File FileName="diploma_project\Program.cs" Line="167" Column="4" />
       <File FileName="diploma_project\Classes\BinomialCoefficients.cs" Line="12" Column="6" />
-      <File FileName="diploma_project\Classes\Factorial.cs" Line="19" Column="4" />
-      <File FileName="diploma_project\Classes\NumberSplits.cs" Line="6" Column="30" />
-      <File FileName="diploma_project\Classes\Combination.cs" Line="55" Column="5" />
-      <File FileName="diploma_project\Classes\ElementarySymmetricPolynomial.cs" Line="53" Column="47" />
-      <File FileName="diploma_project\Classes\Cycle.cs" Line="87" Column="12" />
+      <File FileName="diploma_project\Classes\Factorial.cs" Line="5" Column="2" />
+      <File FileName="diploma_project\Classes\NumberSplits.cs" Line="126" Column="3" />
+      <File FileName="diploma_project\Classes\Combination.cs" Line="106" Column="3" />
+      <File FileName="diploma_project\Classes\Cycle.cs" Line="166" Column="3" />
+      <File FileName="diploma_project\Classes\Permutation.cs" Line="338" Column="3" />
+      <File FileName="diploma_project\Classes\ElementarySymmetricPolynomial.cs" Line="7" Column="2" />
+      <File FileName="diploma_project\Classes\YJMElement.cs" Line="7" Column="2" />
+      <File FileName="diploma_project\Classes\PermutationDictionary.cs" Line="211" Column="3" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MultiItemStartupConfigurations />

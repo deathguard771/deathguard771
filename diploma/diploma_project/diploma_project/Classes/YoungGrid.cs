@@ -40,11 +40,19 @@ namespace diploma_project
 				}
 			}
 			sw.Stop();
+#if sharp6
 			Console.WriteLine($"First stage ready! {sw.Elapsed} elapsed.");
+#else
+            Console.WriteLine("First stage ready! " + sw.Elapsed + " elapsed.");
+#endif
 			sw.Restart();
-			sigmas[0][0].Print2(Output.File, "temp.txt", " = {" + string.Join(", ", sigmas[0][0].Split) + "}");
+            sigmas[0][0].SimplyPrint(Output.File, "temp.txt", " = {" + string.Join(", ", sigmas[0][0].Split) + "}");
+#if sharp6
 			Console.WriteLine("{" + string.Join(", ", sigmas[0][0].Split) + "} printed! " + $"{sw.Elapsed} elapsed.");
-			for (int i = 2; i <= 3; i++)
+#else
+            Console.WriteLine("{" + string.Join(", ", sigmas[0][0].Split) + "} printed! " + sw.Elapsed + " elapsed.");
+#endif
+			for (int i = 2; i <= degree; i++)
 			{
 				var ls = NumberSplits.GenerateSplits (i);
 				foreach (var split in ls)
@@ -104,7 +112,7 @@ namespace diploma_project
 						}
 						res.Split.AddRange(split);
 						sigmas[i - 1].Add(res);
-						res.Print2(Output.File, "temp.txt", " = {" + string.Join(", ", res.Split) + "}");
+						res.SimplyPrint(Output.File, "temp.txt", " = {" + string.Join(", ", res.Split) + "}");
 						//var ccc = 0;
 						//var rrr = res.Where(kvp => kvp.Key.NotTrivialCycles.Count == 3 && kvp.Key.NotTrivialCycles.Count(cycle => cycle.Length == 2) == 3).Select(kvp =>
 						//{
@@ -112,20 +120,33 @@ namespace diploma_project
 						//	return kvp.Value == 1 ? kvp.Key.Text : kvp.Value + "*" + kvp.Key.Text;
 						//});
 						//res.Print (Output.File, "(" + string.Join(", ", res.Split) + ").txt", string.Join("\r\n", rrr) + "\r\n" + "All" + ccc/*.Text.Replace(" + ", "\n")*/);
-						Console.WriteLine("{" + string.Join(", ", res.Split) + "} printed! " + $"{sw.Elapsed} elapsed.");
+#if sharp6
+                        Console.WriteLine("{" + string.Join(", ", res.Split) + "} printed! " + $"{sw.Elapsed} elapsed.");
+#else
+                        Console.WriteLine("{" + string.Join(", ", res.Split) + "} printed! " + sw.Elapsed + " elapsed.");
+#endif
 						sw3.Stop();
 					}
 					else
 					{
-						sigmas[i - 1][0].Print2(Output.File, "temp.txt", " = {" + string.Join(", ", sigmas[i - 1][0].Split) + "}");
+						sigmas[i - 1][0].SimplyPrint(Output.File, "temp.txt", " = {" + string.Join(", ", sigmas[i - 1][0].Split) + "}");
+#if sharp6
 						Console.WriteLine("{" + string.Join(", ", sigmas[i - 1][0].Split) + "} printed! " + $"{sw.Elapsed} elapsed.");
+#else
+                        Console.WriteLine("{" + string.Join(", ", sigmas[i - 1][0].Split) + "} printed! " + sw.Elapsed + " elapsed.");
+#endif
 					}
 				}
 			}
 			sw.Stop();
+#if sharp6
 			Console.WriteLine($"Finding stage: {sw2.Elapsed} elapsed.");
 			Console.WriteLine($"Multiplying stage: {sw3.Elapsed} elapsed.");
 			Console.WriteLine($"Second stage ready! {sw.Elapsed} elapsed.");
+#else
+            Console.WriteLine("Ready! " + sw.Elapsed + " elapsed.");
+#endif
+			
 			sw.Restart();
 			/*foreach (var item in sigmas)
 			{
@@ -136,7 +157,11 @@ namespace diploma_project
 				}
 			}*/
 			sw.Stop();
+#if sharp6
 			Console.WriteLine($"Third stage ready! {sw.Elapsed} elapsed.");
+#else
+            Console.WriteLine("Third stage ready! " + sw.Elapsed + " elapsed.");
+#endif
 		}
 	}
 }

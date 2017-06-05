@@ -174,7 +174,6 @@ namespace diploma_project
 		{
 			return !(y1 == y2);
 		}
-
 	}
 }
 

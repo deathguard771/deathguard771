@@ -10,28 +10,6 @@ namespace diploma_project
 	public class Permutation
 	{
 		/// <summary>
-		/// Количество перестановок определенного циклического типа
-		/// </summary>
-		/// <param name="p">Перестановка</param>
-		public static int GetPermutationsCount(Permutation p)
-		{
-			var dict = new Dictionary<int, int> ();
-			foreach (var cycle in p.cycles)
-			{
-				if (!dict.ContainsKey (cycle.Length))
-				{
-					dict.Add (cycle.Length, 0);
-				}
-				dict [cycle.Length]++;
-			}
-			var nnn = 1;
-			foreach (var kvp in dict)
-			{
-				nnn *= (int)Math.Pow (kvp.Key, kvp.Value) * Factorial.Get(kvp.Value);
-			}
-			return Factorial.Get(p.Order) / nnn;
-		}
-		/// <summary>
 		/// Компаратор для сортировки циклов перестановки 
 		/// </summary>
 		private static Comparison<Cycle> PermutationComparer = new Comparison<Cycle> ((x, y) =>
@@ -45,37 +23,6 @@ namespace diploma_project
 				return x.First < y.First ? -1 : 1;
 			}
 		});
-		/// <summary>
-		/// "Сравнение двух перестановок" с точки зрения циклической структуры
-		/// </summary>
-		/// <param name="p1">P1.</param>
-		/// <param name="p2">P2.</param>
-		public static bool Compare(Permutation p1, Permutation p2)
-		{
-			if (p1.NotTrivialCycles.Count != p2.NotTrivialCycles.Count)
-			{
-				return false;
-			}
-			var fLen = p1.NotTrivialCycles.Select(cycle => cycle.Length).ToList();
-			var sLen = p2.NotTrivialCycles.Select(cycle => cycle.Length).ToList();
-			fLen.Sort();
-			sLen.Sort();
-			for (int i = 0; i < fLen.Count; i++)
-			{
-				if (fLen[i] != sLen[i])
-				{
-					return false;
-				}
-			}
-			/*for (int i = 0; i < p1.NotTrivialCycles.Count; i++)
-			{
-				if (p2.NotTrivialCycles.Count(c => c.Length == p1.NotTrivialCycles[i].Length) == 0)
-				{
-					return false;
-				}
-			}*/
-			return true;
-		}
 		/// <summary>
 		/// Порядок перестановки
 		/// </summary>
@@ -246,6 +193,59 @@ namespace diploma_project
 		public void Print()
 		{
 			Console.WriteLine (Text);
+		}
+		/// <summary>
+		/// "Сравнение двух перестановок" с точки зрения циклической структуры
+		/// </summary>
+		/// <param name="p1">P1.</param>
+		/// <param name="p2">P2.</param>
+		public static bool Compare(Permutation p1, Permutation p2)
+		{
+			if (p1.NotTrivialCycles.Count != p2.NotTrivialCycles.Count)
+			{
+				return false;
+			}
+			var fLen = p1.NotTrivialCycles.Select(cycle => cycle.Length).ToList();
+			var sLen = p2.NotTrivialCycles.Select(cycle => cycle.Length).ToList();
+			fLen.Sort();
+			sLen.Sort();
+			for (int i = 0; i < fLen.Count; i++)
+			{
+				if (fLen[i] != sLen[i])
+				{
+					return false;
+				}
+			}
+			/*for (int i = 0; i < p1.NotTrivialCycles.Count; i++)
+			{
+				if (p2.NotTrivialCycles.Count(c => c.Length == p1.NotTrivialCycles[i].Length) == 0)
+				{
+					return false;
+				}
+			}*/
+			return true;
+		}
+		/// <summary>
+		/// Количество перестановок определенного циклического типа
+		/// </summary>
+		/// <param name="p">Перестановка</param>
+		public static int GetPermutationsCount(Permutation p)
+		{
+			var dict = new Dictionary<int, int>();
+			foreach (var cycle in p.cycles)
+			{
+				if (!dict.ContainsKey(cycle.Length))
+				{
+					dict.Add(cycle.Length, 0);
+				}
+				dict[cycle.Length]++;
+			}
+			var nnn = 1;
+			foreach (var kvp in dict)
+			{
+				nnn *= (int)Math.Pow(kvp.Key, kvp.Value) * Factorial.Get(kvp.Value);
+			}
+			return Factorial.Get(p.Order) / nnn;
 		}
 		/// <summary>
 		/// Определяет равен ли объект <see cref="object"/> данному объекту <see cref="Permutation"/>.

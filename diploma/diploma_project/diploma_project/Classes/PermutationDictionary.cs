@@ -91,7 +91,7 @@ namespace diploma_project
 		/// <summary>
 		/// Печатаем только тип перестановки и его количество
 		/// </summary>
-		public void Print2(Output output = Output.Console, string path = "", string addText = "")
+		public void SimplyPrint(Output output = Output.Console, string path = "", string addText = "")
 		{
 			var dictCounts = new Dictionary<Permutation, int>();
 			foreach (var kvp in this)
