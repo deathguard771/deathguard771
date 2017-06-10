@@ -413,6 +413,7 @@ namespace diploma_project
 #endif
 		}
 #endregion
+
 		public static void Main(string[] args)
 		{
 			Console.WriteLine(string.Join(" ", args));
@@ -440,7 +441,7 @@ namespace diploma_project
 					File.Delete(f);
 				}
 			}
-			var pn = 5;
+			var pn = 4;
 			var vc = pn * 2;
 			var run = Run.ParallelInner;
 			if (args[1] == "outer")
