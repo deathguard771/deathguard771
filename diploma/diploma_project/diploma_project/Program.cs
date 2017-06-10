@@ -3,11 +3,13 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace diploma_project
 {
 	class MainClass
 	{
+		#region последовательно
 		/// <summary>
 		/// Генерация
 		/// </summary>
@@ -15,8 +17,10 @@ namespace diploma_project
 		/// <param name="variablesCount">Количество переменных</param>
 		public static void Generate(int degree, int variablesCount, bool newVariant = true)
 		{
+#if TRACE
 			Stopwatch sw = new Stopwatch(), sw2 = new Stopwatch(), sw3 = new Stopwatch();
 			sw.Start();
+#endif
 			var sigmas = new List<List<PermutationDictionary>>();
 			//first variant
 			for (int i = 1; i <= degree; i++)
@@ -37,29 +41,40 @@ namespace diploma_project
 					item2.SetOrder(maxOrder);
 				}
 			}
+#if TRACE
 			sw.Stop();
 #if sharp6
 			Console.WriteLine($"First stage ready! {sw.Elapsed} elapsed.");
 #else
 			Console.WriteLine("First stage ready! " + sw.Elapsed + " elapsed.");
 #endif
+
 			sw.Restart();
-			sigmas[0][0].SimplyPrint(Output.File, "temp.txt", " = {" + string.Join(", ", sigmas[0][0].Split) + "}");
+#endif
+			sigmas[0][0].SimplyPrint(Output.File, "consist\\temp" + string.Join(", ", sigmas[0][0].Split) + ".txt", " = {" + string.Join(", ", sigmas[0][0].Split) + "}");
+#if TRACE
 #if sharp6
 			Console.WriteLine("{" + string.Join(", ", sigmas[0][0].Split) + "} printed! " + $"{sw.Elapsed} elapsed.");
 #else
 			Console.WriteLine("{" + string.Join(", ", sigmas[0][0].Split) + "} printed! " + sw.Elapsed + " elapsed.");
 #endif
+#endif
+			var ls = new Dictionary<int, List<List<int>>>();
+			for (int i = 2; i<degree + 1; i++)
+			{
+				ls.Add(i, NumberSplits.GenerateSplits(i));
+			}
 			for (int i = 2; i <= degree; i++)
 			{
-				var ls = NumberSplits.GenerateSplits(i);
-				foreach (var split in ls)
+				//var ls = NumberSplits.GenerateSplits(i);
+				foreach (var split in ls[i])
 				{
+					var fName = $"consist\\temp " + string.Join(", ", split) + ".txt";
 					if (split.Count > 1)
 					{
 						var res = new PermutationDictionary();
 						//split.Reverse ();
-						int i1 = 0, i2 = 0, i3 = -1, prevCnt = 0;
+						/*int i1 = 0, i2 = 0, i3 = -1, prevCnt = 0;
 						var c1 = 0;
 						sw2.Start();
 						if (newVariant)
@@ -102,40 +117,43 @@ namespace diploma_project
 						{
 							i3 = 0;
 						}
+#if TRACE
 						sw2.Stop();
+#endif
+						*/
+#if TRACE
 						sw3.Start();
-						for (int j = i3; j < split.Count; j++) //foreach (var elem in split)
+#endif
+						for (int j = 0; j < split.Count; j++) //foreach (var elem in split)
 						{
 							res = res * sigmas[split[j] - 1][0];
 						}
 						res.Split.AddRange(split);
-						sigmas[i - 1].Add(res);
-						res.SimplyPrint(Output.File, "temp.txt", " = {" + string.Join(", ", res.Split) + "}");
-						//var ccc = 0;
-						//var rrr = res.Where(kvp => kvp.Key.NotTrivialCycles.Count == 3 && kvp.Key.NotTrivialCycles.Count(cycle => cycle.Length == 2) == 3).Select(kvp =>
-						//{
-						//	ccc += kvp.Value;
-						//	return kvp.Value == 1 ? kvp.Key.Text : kvp.Value + "*" + kvp.Key.Text;
-						//});
-						//res.Print (Output.File, "(" + string.Join(", ", res.Split) + ").txt", string.Join("\r\n", rrr) + "\r\n" + "All" + ccc/*.Text.Replace(" + ", "\n")*/);
+						//sigmas[i - 1].Add(res);
+						res.SimplyPrint(Output.File, fName, " = {" + string.Join(", ", res.Split) + "}");
+#if TRACE
 #if sharp6
 						Console.WriteLine("{" + string.Join(", ", res.Split) + "} printed! " + $"{sw.Elapsed} elapsed.");
 #else
 						Console.WriteLine("{" + string.Join(", ", res.Split) + "} printed! " + sw.Elapsed + " elapsed.");
 #endif
 						sw3.Stop();
+#endif
 					}
 					else
 					{
-						sigmas[i - 1][0].SimplyPrint(Output.File, "temp.txt", " = {" + string.Join(", ", sigmas[i - 1][0].Split) + "}");
+						sigmas[i - 1][0].SimplyPrint(Output.File, fName, " = {" + string.Join(", ", sigmas[i - 1][0].Split) + "}");
+#if TRACE
 #if sharp6
 						Console.WriteLine("{" + string.Join(", ", sigmas[i - 1][0].Split) + "} printed! " + $"{sw.Elapsed} elapsed.");
 #else
 						Console.WriteLine("{" + string.Join(", ", sigmas[i - 1][0].Split) + "} printed! " + sw.Elapsed + " elapsed.");
 #endif
+#endif
 					}
 				}
 			}
+#if TRACE
 			sw.Stop();
 #if sharp6
 			Console.WriteLine($"Finding stage: {sw2.Elapsed} elapsed.");
@@ -148,67 +166,357 @@ namespace diploma_project
 #endif
 
 			sw.Restart();
-			/*foreach (var item in sigmas)
-			{
-				foreach (var item2 in item)
-				{
-					item2.Print2 (Output.File, "temp.txt", " = {" + string.Join (", ", item2.Split) + "}");
-					//item2.Print (Output.File, "(" + string.Join (", ", item2.Split) + ").txt", item2.Text.Replace(" + ", "\r\n"));
-				}
-			}*/
 			sw.Stop();
 #if sharp6
 			Console.WriteLine($"Third stage ready! {sw.Elapsed} elapsed.");
 #else
 			Console.WriteLine("Third stage ready! " + sw.Elapsed + " elapsed.");
 #endif
+#endif
 		}
-		
-		public static void Main (string[] args)
+		#endregion
+
+		#region параллельно
+		/// <summary>
+		/// Генерация
+		/// </summary>
+		/// <param name="degree">Степень</param>
+		/// <param name="variablesCount">Количество переменных</param>
+		public static void ParallelGenerate(int degree, int variablesCount, bool newVariant = true)
 		{
-			var files = Directory.GetFiles (AppDomain.CurrentDomain.BaseDirectory);
-			foreach (var f in files) {
-				if (f.EndsWith(".txt", StringComparison.CurrentCulture)) {
-					File.Delete (f);
+#if TRACE
+			Stopwatch sw = new Stopwatch(), sw2 = new Stopwatch(), sw3 = new Stopwatch();
+			sw.Start();
+#endif
+			var sigmas = new List<List<PermutationDictionary>>();
+			//first variant
+			for (int i = 1; i <= degree; i++)
+			{
+				var y = YJMElement.Generate(variablesCount + 1);
+				var e = new ElementarySymmetricPolynomial(variablesCount, i);
+				var pd = e.Substitution(y);
+				pd.Split.Add(i);
+				sigmas.Add(new List<PermutationDictionary> { pd });
+			}
+
+			var maxOrder = sigmas.Max(kvp => kvp.Max(kvp2 => kvp2.GetMaxOrder()));
+
+			foreach (var item in sigmas)
+			{
+				foreach (var item2 in item)
+				{
+					item2.SetOrder(maxOrder);
 				}
 			}
-			
-			var pn = 6;
-			var vc = pn * 2;
-
-			using (var fs = File.AppendText ("temp.txt")) {
-				fs.WriteLine ("До " + pn + " степени.");
-				fs.WriteLine (vc + " переменных.");
-				fs.WriteLine ();
-			}
-			var sw = new Stopwatch();
-			sw.Start();
-			Generate (pn, vc, true);
+#if TRACE
 			sw.Stop();
 #if sharp6
-			Console.WriteLine($"Ready! {sw.Elapsed} elapsed.");
+			Console.WriteLine($"First stage ready! {sw.Elapsed} elapsed.");
 #else
-            Console.WriteLine("Ready! " + sw.Elapsed + " elapsed.");
+			Console.WriteLine("First stage ready! " + sw.Elapsed + " elapsed.");
 #endif
-            //ErrorBeep();
-			Console.ReadLine();
+			sw.Restart();
+#endif
+			sigmas[0][0].SimplyPrint(Output.File, "parall" + "\\temp" + string.Join(", ", sigmas[0][0].Split) + ".txt", " = {" + string.Join(", ", sigmas[0][0].Split) + "}");
+#if TRACE
+#if sharp6
+			Console.WriteLine("{" + string.Join(", ", sigmas[0][0].Split) + "} printed! " + $"{sw.Elapsed} elapsed.");
+#else
+			Console.WriteLine("{" + string.Join(", ", sigmas[0][0].Split) + "} printed! " + sw.Elapsed + " elapsed.");
+#endif
+#endif
+			var ls = new Dictionary<int, List<List<int>>>();
+			for (int i = 2; i < degree + 1; i++)
+			{
+				ls.Add(i, NumberSplits.GenerateSplits(i));
+			}
+			Parallel.ForEach(ls, splits =>
+			{
+				//var ls = NumberSplits.GenerateSplits(i);
+				var i = splits.Key;
+				foreach (var split in splits.Value)
+				{
+					var fName = $"parall\\temp " + string.Join(", ", split) + ".txt";
+					if (split.Count > 1)
+					{
+						var res = new PermutationDictionary();
+#if TRACE
+						sw3.Start();
+#endif
+						for (int j = 0; j < split.Count; j++)
+						{
+							res = res * sigmas[split[j] - 1][0];
+						}
+						res.Split.AddRange(split);
+						res.SimplyPrint(Output.File, fName, " = {" + string.Join(", ", res.Split) + "}");
+#if TRACE
+#if sharp6
+						Console.WriteLine("{" + string.Join(", ", res.Split) + "} printed! " + $"{sw.Elapsed} elapsed.");
+#else
+						Console.WriteLine("{" + string.Join(", ", res.Split) + "} printed! " + sw.Elapsed + " elapsed.");
+#endif
+						sw3.Stop();
+#endif
+					}
+					else
+					{
+						sigmas[i - 1][0].SimplyPrint(Output.File, fName, " = {" + string.Join(", ", sigmas[i - 1][0].Split) + "}");
+#if TRACE
+#if sharp6
+						Console.WriteLine("{" + string.Join(", ", sigmas[i - 1][0].Split) + "} printed! " + $"{sw.Elapsed} elapsed.");
+#else
+						Console.WriteLine("{" + string.Join(", ", sigmas[i - 1][0].Split) + "} printed! " + sw.Elapsed + " elapsed.");
+#endif
+#endif
+					}
+				}
+			});
+#if TRACE
+			sw.Stop();
+#if sharp6
+			Console.WriteLine($"Finding stage: {sw2.Elapsed} elapsed.");
+			Console.WriteLine($"Multiplying stage: {sw3.Elapsed} elapsed.");
+			Console.WriteLine($"Second stage ready! {sw.Elapsed} elapsed.");
+#else
+			Console.WriteLine($"Finding stage: " + sw2.Elapsed + " elapsed.");
+			Console.WriteLine($"Multiplying stage: " + sw3.Elapsed + " elapsed.");
+			Console.WriteLine($"Second stage ready! " + sw.Elapsed + " elapsed.");
+#endif
+
+			sw.Restart();
+			sw.Stop();
+#if sharp6
+			Console.WriteLine($"Third stage ready! {sw.Elapsed} elapsed.");
+#else
+			Console.WriteLine("Third stage ready! " + sw.Elapsed + " elapsed.");
+#endif
+#endif
+		}
+		#endregion
+
+		#region параллельно2
+		/// <summary>
+		/// Генерация
+		/// </summary>
+		/// <param name="degree">Степень</param>
+		/// <param name="variablesCount">Количество переменных</param>
+		public static void ParallelGenerate2(int degree, int variablesCount, bool newVariant = true)
+		{
+#if TRACE
+			Stopwatch sw = new Stopwatch(), sw2 = new Stopwatch(), sw3 = new Stopwatch();
+			sw.Start();
+#endif
+			var sigmas = new List<List<PermutationDictionary>>();
+			//first variant
+			for (int i = 1; i <= degree; i++)
+			{
+				var y = YJMElement.Generate(variablesCount + 1);
+				var e = new ElementarySymmetricPolynomial(variablesCount, i);
+				var pd = e.Substitution(y);
+				pd.Split.Add(i);
+				sigmas.Add(new List<PermutationDictionary> { pd });
+			}
+
+			var maxOrder = sigmas.Max(kvp => kvp.Max(kvp2 => kvp2.GetMaxOrder()));
+
+			foreach (var item in sigmas)
+			{
+				foreach (var item2 in item)
+				{
+					item2.SetOrder(maxOrder);
+				}
+			}
+
+#if TRACE
+			sw.Stop();
+#if sharp6
+			Console.WriteLine($"First stage ready! {sw.Elapsed} elapsed.");
+#else
+			Console.WriteLine("First stage ready! " + sw.Elapsed + " elapsed.");
+#endif
+			sw.Restart();
+#endif
+			sigmas[0][0].SimplyPrint(Output.File, "parall2" + "\\temp" + string.Join(", ", sigmas[0][0].Split) + ".txt", " = {" + string.Join(", ", sigmas[0][0].Split) + "}");
+#if TRACE
+#if sharp6
+			Console.WriteLine("{" + string.Join(", ", sigmas[0][0].Split) + "} printed! " + $"{sw.Elapsed} elapsed.");
+#else
+			Console.WriteLine("{" + string.Join(", ", sigmas[0][0].Split) + "} printed! " + sw.Elapsed + " elapsed.");
+#endif
+#endif
+			var ls = new Dictionary<int, List<List<int>>>();
+			for (int i = 2; i<degree + 1; i++)
+			{
+				ls.Add(i, NumberSplits.GenerateSplits(i));
+			}
+			for (int i = 2; i<degree + 1; i++)
+			{
+				//var ls = NumberSplits.GenerateSplits(i);
+				Parallel.ForEach(ls[i], split =>
+				{
+					var fName = $"parall2\\temp " + string.Join(", ", split) + ".txt";
+					if (split.Count > 1)
+					{
+						var res = new PermutationDictionary();
+#if TRACE
+						sw3.Start();
+#endif
+						for (int j = 0; j < split.Count; j++)
+						{
+							res = res * sigmas[split[j] - 1][0];
+						}
+						res.Split.AddRange(split);
+						res.SimplyPrint(Output.File, fName, " = {" + string.Join(", ", res.Split) + "}");
+
+#if TRACE
+#if sharp6
+						Console.WriteLine("{" + string.Join(", ", res.Split) + "} printed! " + $"{sw.Elapsed} elapsed.");
+#else
+						Console.WriteLine("{" + string.Join(", ", res.Split) + "} printed! " + sw.Elapsed + " elapsed.");
+#endif
+						sw3.Stop();
+#endif
+					}
+					else
+					{
+						sigmas[i - 1][0].SimplyPrint(Output.File, fName, " = {" + string.Join(", ", sigmas[i - 1][0].Split) + "}");
+
+#if TRACE
+#if sharp6
+						Console.WriteLine("{" + string.Join(", ", sigmas[i - 1][0].Split) + "} printed! " + $"{sw.Elapsed} elapsed.");
+#else
+						Console.WriteLine("{" + string.Join(", ", sigmas[i - 1][0].Split) + "} printed! " + sw.Elapsed + " elapsed.");
+#endif
+#endif
+					}
+				});
+			}
+#if TRACE
+			sw.Stop();
+#if sharp6
+			Console.WriteLine($"Finding stage: {sw2.Elapsed} elapsed.");
+			Console.WriteLine($"Multiplying stage: {sw3.Elapsed} elapsed.");
+			Console.WriteLine($"Second stage ready! {sw.Elapsed} elapsed.");
+#else
+			Console.WriteLine($"Finding stage: " + sw2.Elapsed + " elapsed.");
+			Console.WriteLine($"Multiplying stage: " + sw3.Elapsed + " elapsed.");
+			Console.WriteLine($"Second stage ready! " + sw.Elapsed + " elapsed.");
+#endif
+
+			sw.Restart();
+			sw.Stop();
+#if sharp6
+			Console.WriteLine($"Third stage ready! {sw.Elapsed} elapsed.");
+#else
+			Console.WriteLine("Third stage ready! " + sw.Elapsed + " elapsed.");
+#endif
+#endif
+		}
+#endregion
+		public static void Main(string[] args)
+		{
+			Console.WriteLine(string.Join(" ", args));
+			var files = Directory.GetFiles(AppDomain.CurrentDomain.BaseDirectory + "\\consist");
+			foreach (var f in files)
+			{
+				if (f.EndsWith(".txt", StringComparison.CurrentCulture))
+				{
+					File.Delete(f);
+				}
+			}
+			files = Directory.GetFiles(AppDomain.CurrentDomain.BaseDirectory + "\\parall");
+			foreach (var f in files)
+			{
+				if (f.EndsWith(".txt", StringComparison.CurrentCulture))
+				{
+					File.Delete(f);
+				}
+			}
+			files = Directory.GetFiles(AppDomain.CurrentDomain.BaseDirectory + "\\parall2");
+			foreach (var f in files)
+			{
+				if (f.EndsWith(".txt", StringComparison.CurrentCulture))
+				{
+					File.Delete(f);
+				}
+			}
+			var pn = 5;
+			var vc = pn * 2;
+			var run = Run.ParallelInner;
+			if (args[1] == "outer")
+			{
+				run = Run.ParallelOuter;
+			}
+			else if (args[1] == "inner")
+			{
+				run = Run.ParallelInner;
+			}
+
+			var sw = new Stopwatch();
+			if (run == Run.Consistent)
+			{
+				sw.Start();
+				Generate(pn, vc, true);
+				sw.Stop();
+				using (var fs = File.AppendText("consist\\" + pn + ".time"))
+				{
+					fs.WriteLine(sw.Elapsed);
+				}
+#if sharp6
+				Console.WriteLine($"Consistent ready! {sw.Elapsed} elapsed.");
+#else
+            	Console.WriteLine("Consistent ready! " + sw.Elapsed + " elapsed.");
+#endif
+			}
+			else if (run == Run.ParallelOuter)
+			{
+				sw.Start();
+				ParallelGenerate(pn, vc, true);
+				sw.Stop();
+				using (var fs = File.AppendText("parall\\" + pn + ".time"))
+				{
+					fs.WriteLine(sw.Elapsed);
+				}
+#if sharp6
+				Console.WriteLine($"Parallel outer ready! {sw.Elapsed} elapsed.");
+#else
+            	Console.WriteLine("Parallel outer ready! " + sw.Elapsed + " elapsed.");
+#endif
+			}
+			else if (run == Run.ParallelInner)
+			{
+				sw.Start();
+                ParallelGenerate2(pn, vc, true);
+				sw.Stop();
+				using (var fs = File.AppendText("parall2\\" + pn + ".time"))
+				{
+					fs.WriteLine(sw.Elapsed);
+				}
+#if sharp6
+				Console.WriteLine($"Parallel inner ready! {sw.Elapsed} elapsed.");
+
+#else
+            	Console.WriteLine("Parallel inner ready! " + sw.Elapsed + " elapsed.");
+#endif
+			}
+			//Console.ReadLine();
 		}
 
 		public static void SuccessBeep()
 		{
-			for (int i = 0; i< 10; i++)
+			/*for (int i = 0; i< 10; i++)
 			{
 				for (int j = 0; j< 3; j++)
 				{
 					Console.Beep(1000, 250);
 				}
 				System.Threading.Thread.Sleep(500);
-			}
+			}*/
 		}
 
 		public static void ErrorBeep()
 		{
-			for (int j = 0; j < 3; j++)
+			/*for (int j = 0; j < 3; j++)
 			{
 				Console.Beep(500, 500);
 			}
@@ -222,7 +530,14 @@ namespace diploma_project
 			{
 				Console.Beep(500, 500);
 			}
-			System.Threading.Thread.Sleep(500);
+			System.Threading.Thread.Sleep(500);*/
 		}
+	}
+
+	enum Run
+	{
+		ParallelOuter,
+		ParallelInner,
+		Consistent
 	}
 }

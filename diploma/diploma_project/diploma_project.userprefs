@@ -8,7 +8,7 @@
   </MonoDevelop.Ide.DebuggingService.Breakpoints>
   <MonoDevelop.Ide.Workbench ActiveDocument="diploma_project\Program.cs">
     <Files>
-      <File FileName="diploma_project\Program.cs" Line="167" Column="4" />
+      <File FileName="diploma_project\Program.cs" Line="447" Column="15" />
       <File FileName="diploma_project\Classes\BinomialCoefficients.cs" Line="12" Column="6" />
       <File FileName="diploma_project\Classes\Factorial.cs" Line="5" Column="2" />
       <File FileName="diploma_project\Classes\NumberSplits.cs" Line="126" Column="3" />
