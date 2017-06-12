@@ -11,7 +11,7 @@ namespace diploma_project
 		/// генерирует разбиения числа
 		/// </summary>
 		/// <param name="n">Число</param>
-		public static List<List<int>> GenerateSplits(int n)
+		public static List<List<int>> GenerateSplits2(int n)
 		{
 			n += 1;
 			Step(n - 1, n - 1);
@@ -49,7 +49,7 @@ namespace diploma_project
 					}
 				}
 			}
-			fCompoz.Sort(delegate (List<int> x, List<int> y)
+			/*fCompoz.Sort(delegate (List<int> x, List<int> y)
 			{
 				if (x.Count > y.Count)
 				{
@@ -74,7 +74,7 @@ namespace diploma_project
 					}
 					return 0;
 				}
-			});
+			});*/
 			return fCompoz;
 		}
 		/// <summary>
@@ -116,12 +116,90 @@ namespace diploma_project
 			}
 			for (int i = 0; i < l1.Count; i++)
 			{
-				if (l1 [i] != l2 [i])
+				if (l1[i] != l2[i])
 				{
 					return false;
 				}
 			}
 			return true;
+		}
+		public static List<List<int>> GenerateSplits(int n)
+		{
+			var ls = new List<List<int>>();
+			int[] a = new int[n + 1];
+			int x = 0;
+			int q = 0;
+			//step 1
+			for (int i = n; i >= 1; i--)
+			{
+				a[i] = 1;
+			}
+			int m = 1;
+			a[0] = 0;
+			var flag2 = true;
+			//step 2
+			do
+			{
+				if (flag2)
+				{
+					a[m] = n;
+					q = m - (n == 1 ? 1 : 0);
+					//step 3
+				}
+				else
+				{
+					flag2 = true;
+				}
+				ls.Add(a.ToList().GetRange(1, m));
+				if (a[q] == 2)
+				{
+					//step 4
+					a[q] = 1;
+					q = q - 1;
+					m = m + 1;
+					flag2 = false;
+					continue;
+				}
+				else
+				{
+					//step 5
+					if (q == 0)
+					{
+						return ls;
+					}
+					else
+					{
+						x = a[q] - 1;
+						a[q] = x;
+						n = m - q + 1;
+						m = q + 1;
+					}
+				}
+				//step 6
+				do
+				{
+					if (n <= x)
+					{
+						break;
+					}
+					else
+					{
+						a[m] = x;
+						m = m + 1;
+						n = n - x;
+					}
+				}
+				while (true);
+			}
+			while (true);
+		}
+
+		public static void Trace(string text)
+		{
+#if TRACE
+			System.Console.WriteLine(text);
+			System.Console.ReadKey();
+#endif
 		}
 	}
 }

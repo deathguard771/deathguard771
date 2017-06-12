@@ -443,14 +443,22 @@ namespace diploma_project
 			}
 			var pn = 4;
 			var vc = pn * 2;
+			//var sss = NumberSplits.GenerateSplits2(pn);
+
+			//Console.WriteLine(string.Join(" ", sss.Select(s => string.Join(",", s))));
+			//Console.ReadKey();
+
 			var run = Run.ParallelInner;
-			if (args[1] == "outer")
+			if (args.Length > 1)
 			{
-				run = Run.ParallelOuter;
-			}
-			else if (args[1] == "inner")
-			{
-				run = Run.ParallelInner;
+				if (args[1] == "outer")
+				{
+					run = Run.ParallelOuter;
+				}
+				else if (args[1] == "inner")
+				{
+					run = Run.ParallelInner;
+				}
 			}
 
 			var sw = new Stopwatch();
