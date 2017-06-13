@@ -4,6 +4,7 @@ using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
+using System.Timers;
 
 namespace diploma_project
 {
@@ -416,32 +417,8 @@ namespace diploma_project
 
 		public static void Main(string[] args)
 		{
-			Console.WriteLine(string.Join(" ", args));
-			var files = Directory.GetFiles(AppDomain.CurrentDomain.BaseDirectory + "\\consist");
-			foreach (var f in files)
-			{
-				if (f.EndsWith(".txt", StringComparison.CurrentCulture))
-				{
-					File.Delete(f);
-				}
-			}
-			files = Directory.GetFiles(AppDomain.CurrentDomain.BaseDirectory + "\\parall");
-			foreach (var f in files)
-			{
-				if (f.EndsWith(".txt", StringComparison.CurrentCulture))
-				{
-					File.Delete(f);
-				}
-			}
-			files = Directory.GetFiles(AppDomain.CurrentDomain.BaseDirectory + "\\parall2");
-			foreach (var f in files)
-			{
-				if (f.EndsWith(".txt", StringComparison.CurrentCulture))
-				{
-					File.Delete(f);
-				}
-			}
-			var pn = 4;
+			//Console.WriteLine(string.Join(" ", args));
+			var pn = 5;
 			var vc = pn * 2;
 			//var sss = NumberSplits.GenerateSplits2(pn);
 
@@ -462,11 +439,29 @@ namespace diploma_project
 			}
 
 			var sw = new Stopwatch();
+			var timer = new Timer();
+			timer.Interval = 100;
+			timer.Elapsed += delegate
+			{
+				Console.Clear();
+				Console.WriteLine("Elapsed: " + sw.Elapsed);
+			};
+			sw.Start();
+			timer.Start();
 			if (run == Run.Consistent)
 			{
-				sw.Start();
+				var files = Directory.GetFiles(AppDomain.CurrentDomain.BaseDirectory + "\\consist");
+				foreach (var f in files)
+				{
+					if (f.EndsWith(".txt", StringComparison.CurrentCulture))
+					{
+						File.Delete(f);
+					}
+				}
 				Generate(pn, vc, true);
 				sw.Stop();
+				timer.Stop();
+				Console.Clear();
 				using (var fs = File.AppendText("consist\\" + pn + ".time"))
 				{
 					fs.WriteLine(sw.Elapsed);
@@ -479,9 +474,18 @@ namespace diploma_project
 			}
 			else if (run == Run.ParallelOuter)
 			{
-				sw.Start();
+				var files = Directory.GetFiles(AppDomain.CurrentDomain.BaseDirectory + "\\parall");
+				foreach (var f in files)
+				{
+					if (f.EndsWith(".txt", StringComparison.CurrentCulture))
+					{
+						File.Delete(f);
+					}
+				}
 				ParallelGenerate(pn, vc, true);
 				sw.Stop();
+				//timer.Stop();
+				Console.Clear();
 				using (var fs = File.AppendText("parall\\" + pn + ".time"))
 				{
 					fs.WriteLine(sw.Elapsed);
@@ -494,9 +498,18 @@ namespace diploma_project
 			}
 			else if (run == Run.ParallelInner)
 			{
-				sw.Start();
+				var files = Directory.GetFiles(AppDomain.CurrentDomain.BaseDirectory + "\\parall2");
+				foreach (var f in files)
+				{
+					if (f.EndsWith(".txt", StringComparison.CurrentCulture))
+					{
+						File.Delete(f);
+					}
+				}
                 ParallelGenerate2(pn, vc, true);
 				sw.Stop();
+				timer.Stop();
+				Console.Clear();
 				using (var fs = File.AppendText("parall2\\" + pn + ".time"))
 				{
 					fs.WriteLine(sw.Elapsed);
