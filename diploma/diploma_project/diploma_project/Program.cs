@@ -316,8 +316,9 @@ namespace diploma_project
 				var pd = e.Substitution(y);
 				pd.Split.Add(i);
 				sigmas.Add(new List<PermutationDictionary> { pd });
-			}
 
+				GC.Collect();
+			}
 			var maxOrder = sigmas.Max(kvp => kvp.Max(kvp2 => kvp2.GetMaxOrder()));
 
 			foreach (var item in sigmas)
@@ -345,12 +346,14 @@ namespace diploma_project
 			Console.WriteLine("{" + string.Join(", ", sigmas[0][0].Split) + "} printed! " + sw.Elapsed + " elapsed.");
 #endif
 #endif
+			GC.Collect();
 			var ls = new Dictionary<int, List<List<int>>>();
 			for (int i = 2; i<degree + 1; i++)
 			{
 				ls.Add(i, NumberSplits.GenerateSplits(i));
 			}
-			for (int i = 2; i<degree + 1; i++)
+			GC.Collect();
+			for (int i = 5; i<degree + 1; i++)
 			{
 				//var ls = NumberSplits.GenerateSplits(i);
 				Parallel.ForEach(ls[i], split =>
@@ -365,10 +368,11 @@ namespace diploma_project
 						for (int j = 0; j < split.Count; j++)
 						{
 							res = res * sigmas[split[j] - 1][0];
+							GC.Collect();
 						}
 						res.Split.AddRange(split);
 						res.SimplyPrint(Output.File, fName, " = {" + string.Join(", ", res.Split) + "}");
-
+						GC.Collect();
 #if TRACE
 #if sharp6
 						Console.WriteLine("{" + string.Join(", ", res.Split) + "} printed! " + $"{sw.Elapsed} elapsed.");
@@ -381,7 +385,7 @@ namespace diploma_project
 					else
 					{
 						sigmas[i - 1][0].SimplyPrint(Output.File, fName, " = {" + string.Join(", ", sigmas[i - 1][0].Split) + "}");
-
+						GC.Collect();
 #if TRACE
 #if sharp6
 						Console.WriteLine("{" + string.Join(", ", sigmas[i - 1][0].Split) + "} printed! " + $"{sw.Elapsed} elapsed.");
@@ -447,7 +451,7 @@ namespace diploma_project
 				Console.WriteLine("Elapsed: " + sw.Elapsed);
 			};
 			sw.Start();
-			timer.Start();
+			//timer.Start();
 			if (run == Run.Consistent)
 			{
 				var files = Directory.GetFiles(AppDomain.CurrentDomain.BaseDirectory + "\\consist");
@@ -508,7 +512,7 @@ namespace diploma_project
 				}
                 ParallelGenerate2(pn, vc, true);
 				sw.Stop();
-				timer.Stop();
+				//timer.Stop();
 				Console.Clear();
 				using (var fs = File.AppendText("parall2\\" + pn + ".time"))
 				{

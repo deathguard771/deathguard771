@@ -1,3 +1,4 @@
 Consistent ready! 00:48:07.0537134 elapsed
+Parallel outer ready! 00:45:01.3440154 elapsed.
 
 05:32:06.5114096

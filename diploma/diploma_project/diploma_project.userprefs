@@ -8,7 +8,7 @@
   </MonoDevelop.Ide.DebuggingService.Breakpoints>
   <MonoDevelop.Ide.Workbench ActiveDocument="diploma_project\Program.cs">
     <Files>
-      <File FileName="diploma_project\Program.cs" Line="421" Column="4" />
+      <File FileName="diploma_project\Program.cs" Line="351" Column="16" />
       <File FileName="diploma_project\Classes\YJMElement.cs" Line="7" Column="2" />
       <File FileName="diploma_project\Classes\Permutation.cs" Line="1" Column="1" />
       <File FileName="diploma_project\Classes\ElementarySymmetricPolynomial.cs" Line="1" Column="1" />
